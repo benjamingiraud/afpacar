@@ -1,0 +1,16 @@
+{% extends 'template.html.twig' %}{# empty Twig template #}
+{% block main %}
+    <div class="column-wrapper">
+    <h1 class="logo signup darkgreen">Connexion {% if app.user %}{{app.user.username}}{%endif%}</h1>
+    <form class="column-wrapper" method="post" action={{ path('login') }}>
+        
+        <span class="legend">Pseudo:</span>
+        <input type="text" name="_username" required/>
+        
+        <span class="legend">Mot de passe:</span>
+        <input type="password" name="_password" required />
+ 
+        <input class="inputfont" type="submit" value="Se connecter" />
+    </form>
+</div>
+{% endblock %}

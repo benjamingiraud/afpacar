@@ -1,0 +1,21 @@
+security:
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        main:
+            entity: { class: AppBundle\Entity\User, property: username }
+ 
+    encoders:
+        AppBundle\Entity\User: bcrypt
+        
+    firewalls:
+        secured_area:
+            anonymous: ~
+            form_login:
+                login_path:  /login
+                check_path:  /login
+            logout: { path: /logout, target: / }
+ 
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/annonce/new, roles: ROLE_USER }

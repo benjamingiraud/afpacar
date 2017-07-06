@@ -1,0 +1,46 @@
+.logo::before, .logo::after {
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+}
+.logo::before {
+    padding-right: 0.5em;
+}
+.logo::after {
+    padding-left: 0.5em;
+}
+.signin::before {
+    content: '\f007';
+}
+.signup::before {
+    content: '\f234';
+}
+.search::before {
+    color: #6ED023;
+    content: '\f002';
+}
+.redirect::after {
+    content: '\f08e';
+}
+.car::after {
+    content: '\f1b9';
+}
+.menudown::before {
+    content: '\f107';
+}
+.phone::before {
+    content: '\f095';
+    color: #6ED023;
+    margin-right: 1em;
+}
+.mail::before {
+    content: '\f0e0';
+    color: #6ED023;
+    margin-right: 1em;
+}
+.date::before {
+    content: '\f273';
+    color: #6ED023;
+    margin-right: 1em;
+}

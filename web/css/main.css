@@ -1,0 +1,285 @@
+
+body {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+.inputfont {
+    font-family: 'Raleway';
+    font-weight: bold;
+}
+
+header {
+    border-bottom: 1px solid #6ED023;
+    box-shadow: 0 0 5px #6ED023;
+    padding: 0.25em 0;
+}
+div.header-container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.logoinline{
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+}
+.log-container a {
+    text-decoration: none;
+    padding: 1em;
+    color: #6ED023;
+    transition: 0.33s all ease-out;
+}
+.log-container a:nth-child(odd):hover {
+    background-color: #6ED023;
+    color: white;
+}
+.log-container a:nth-child(even) {
+    color : #44A33D;
+}
+.log-container a:nth-child(even):hover {
+    background-color : #44A33D;
+    color:white;
+}
+div.main-container {
+    width: 80%;
+    margin: 2em auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+}
+div.search-container {
+    flex: 1;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+input{
+    padding: 0.5em;
+    border-style: none;    
+    border: 1px solid #6ED023;
+    transition: 0.33s all ease-out;
+}
+input:focus {
+    box-shadow: 0 0 5px #44A33D;
+}
+input[name=search] {
+    flex: 1;
+    margin-right: 0.5em;
+}
+.darkgreen {
+    color: #44A33D;
+}
+.lightgreen {
+    color: #6ED023;
+}
+.formsearch {
+    margin: 2em 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#searchyeah {
+    cursor: pointer;
+    background-color: #FFFFFF;
+}
+#searchyeah:hover {
+    background-color: #44A33D;
+    color: #ffffff;
+}
+/*Signin page*/
+.column-wrapper {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+form.column-wrapper {
+    margin-top: 2em;
+    align-items: stretch;
+}
+form.column-wrapper input:not(:last-of-type) {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
+form.column-wrapper input:last-of-type {
+    cursor: pointer;
+    margin-top: 2em;
+    text-decoration: none;
+    text-align: center;
+    padding: 1.5em;
+    background-color: #44A33D;
+    transition: 0.33s all ease-out;
+    color: #FFFFFF;
+    border: 1px solid #44A33D;
+    width: 100%;
+}
+form.column-wrapper input:last-of-type:hover {
+    background-color: #6ED023;
+}
+select {
+    margin-bottom: 1em;
+}
+
+
+/* JQUERY UI */
+#etablishments-button, #region-button {
+    padding: 0.5em 0;
+    width: 100%;
+    border-radius: 0;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    font-size: 1em;
+}
+.ui-selectmenu-icon {
+   margin-right: 0.5em;
+}
+.ui-selectmenu-text {
+    margin-left: 0.5em;
+}
+div.ui-tooltip {
+    font-size: 75%;
+}
+
+/* CENTER LIST */
+.list-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.etablishment-container {
+    display: flex;
+    flex-direction: column;
+}
+.sumup {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.fixmyproblems {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.etablishment-container:not(:last-of-type) {
+    border-bottom: 1px solid #6ED023;
+}
+.etinfos-container, .coordonate {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 1em;
+    max-width: 75%;
+}
+.redirect-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+h2 {
+    margin: 0.25em 0 0.5em 0;
+    padding: 0;
+}
+.etablishment-container p {
+    margin: 0;
+}
+.etablishment-container p:last-of-type {
+    margin-bottom: 0.5em;
+}
+.etablishment-container a, .etablishment-container button {
+    text-decoration: none;
+    color: #44A33D;
+    background-color: #FFFFFF;
+}
+
+.research {
+    margin: auto;
+}
+.resultat {
+    width: 100%;
+    margin-bottom: 2em;
+}
+/*
+
+ojscjkblazs=x;
+*/
+.newcarpooling {
+    text-decoration: none;
+    text-align: center;
+    padding: 1em;
+    background-color: #44A33D;
+    transition: 0.33s all ease-out;
+    color: #FFFFFF;
+    border: 1px solid #44A33D;
+    width: 100%;
+}
+.newcarpooling:hover{
+    background-color: #6ED023;
+}
+.importanto {
+    font-size: 125%;
+}
+.choice-container {
+   display: flex;
+   flex-direction: row;
+   justify-content:center;
+   width: 100%;
+   margin-bottom: 2em;
+}
+button {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    border-style: none;
+    cursor: pointer;
+    color: #FFFFFF;
+    transition: all 0.33s ease-out;
+}
+.offres {
+    flex: 1;
+    background-color: #6ED023;
+    padding: 1em;
+}
+.demandes {
+    flex: 1;
+    background-color: #44A33D;
+    padding: 1em;
+}
+.selected {
+    
+}
+.userinfo {
+    display: flex;
+    flex-direction: column;
+}
+.coordonate {
+    margin-left: 1em;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.coordonate p {
+    margin: 0.25em;
+}
+.hidden {
+    display: none;
+}
+.alignselft {
+    align-self: center;
+}
