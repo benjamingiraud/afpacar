@@ -52,9 +52,9 @@
     {% else %}
         <div class="list-container">
                 <div class="resultat">
-                    <h2>Aucun co-voiturage disponible pour le moment pour le <i class="lightgreen">{{ region }}</i></h2>
+                    <h2>Aucun co-voiturage disponible pour le moment</h2>
                 </div>                        
-                <a class="logo car newcarpooling" href="index.php?page=addcarpooling&etablishment=' . $currentEtablishment . '">Soyez alors le premier a proposer du covoiturage!</a>
+                <a class="logo car newcarpooling" href="{#{{ path('newAdvert') }}#}">Soyez alors le premier a proposer du covoiturage!</a>
           </div>';
     {% endif %}
 {% endblock %}

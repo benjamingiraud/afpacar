@@ -1,16 +1,16 @@
 {% extends "template.html.twig" %}
 
 {% block main %}
-    {% if number|number_format %} 
+    {% if establishments|length %} 
     <div class="list-container">
             <div class="resultat">
                 <h1>Resultat de la recherche pour : <i class="lightgreen">{{ filter }}</i></h1>
-                <h2><b class="lightgreen importanto">{{ number }}</b> centre(s) trouvé(s)</h2>
+                <h2><b class="lightgreen importanto">{{ establishments|length }}</b> centre(s) trouvé(s)</h2>
             </div>
-            <label class="logo search research" for="search">Nouvelle recherche : </label>
+            <label class="logo search research" for="search">Vous n'avez pas trouvé ce que vous vouliez ? : </label>
             <form class="formsearch" method="post" action={{ path('inputsearch') }}>
                  <input id="afpasearch" name="search" type="search" placeholder="Entrez un code postal, une adresse ou une ville">
-                 <input id="searchyeah" class="logoinline" type="submit" value="&#xf002" />
+                 <input id="searchyeah" class="logoinline darkgreen" type="submit" value="&#xf002" />
             </form>
     {% for establishment in establishments %} 
             <div class="etablishment-container fixmyproblems">
@@ -20,9 +20,9 @@
                     <p>{{ establishment.postal }} {{ establishment.city }} </p>
                 </div>
                 <div class="redirect-container">
-                    <a class="logo redirect" 
+                    <a class="logo coollinks redirect" 
                        href="{{ path('advert', {'region': establishment.name|lower|replace(' ', '-'), 'id' : establishment.id}) }}">
-                        Voir la fiche de covoiturage
+                       Voir la fiche de covoiturage
                     </a>
                 </div>
             </div>
@@ -31,7 +31,7 @@
     {% else %}
         <div class="list-container">
                 <div class="resultat">
-                     <h1>Aucun résultat pour la recherche : <i class="lightgreen">{{ filter }}</i></h1>
+                     <h1>Désolé, aucun résultat pour la recherche : <i class="lightgreen">{{ filter }}</i></h1>
                 </div>
                 <label class="logo search research" for="search">Recommencez votre recherche : </label>
                 <form class="formsearch" method="post" action={{ path('inputsearch') }}>

@@ -1,16 +1,21 @@
 {% extends 'template.html.twig' %}{# empty Twig template #}
 {% block main %}
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
     <div class="column-wrapper">
-    <h1 class="logo signup darkgreen">Connexion {% if app.user %}{{app.user.username}}{%endif%}</h1>
+    <h1 class="logo signup darkgreen">Connexion</h1>
+    
     <form class="column-wrapper" method="post" action={{ path('login') }}>
-        
-        <span class="legend">Pseudo:</span>
-        <input type="text" name="_username" required/>
-        
-        <span class="legend">Mot de passe:</span>
-        <input type="password" name="_password" required />
- 
-        <input class="inputfont" type="submit" value="Se connecter" />
+        <div>
+            <label for='_username' class="legend">Nom d'utilisateur ou email :</label>
+            <input type="text" name="_username" required/>
+        </div>
+        <div>
+            <label for='_password' class="legend">Mot de passe :</label>
+            <input type="password" name="_password" required />
+        </div>
+        <button class="inputfont" type="submit">Se connecter!</button>
     </form>
 </div>
 {% endblock %}

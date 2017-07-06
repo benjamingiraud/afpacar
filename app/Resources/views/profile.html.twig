@@ -1,0 +1,57 @@
+{% extends "template.html.twig" %}
+
+{% block main %}
+    {% if user %}
+    {% for profile in user  %}
+    <div class="profile-container">
+        <div class="thumbnail-container">
+            <div class="username-container">
+                <h2 class="lightgreen"> {{ profile.username }}</h2>
+                {% image 'images/afpa.jpg' %}
+                    <img class="thumbnail-user" src="{{ asset_url }}" />
+                {% endimage %}
+            </div>
+            {% if app.user.username == profile.username %}
+                <button id="editprofile" class="darkgreen">Editer votre profil</button>
+            {% endif %}
+            <a class="coollinks" href="{#{{ path('adverts', {username : user } }}#}">
+                Voir ses annonces</a>
+            <a class="coollinks" href="{#{{ path('adverts', {username : user } }}#}">
+                <b>Reporter cet utilisateur</b></a>
+        </div>
+        <div class="mainInfos-container">
+            <div class="labelInput-container">
+                <label for="lastname">Nom :</label>
+                <input class="inactive" disabled type="text" name="lastname" placeholder="{{ profile.lastname }}">
+            </div>
+            <div class="labelInput-container">
+                <label for="firstname">Prénom :</label>
+                <input class="inactive" disabled type="text" name="firstname" placeholder="{{ profile.firstname }}">
+            </div>
+            <div class="labelInput-container">
+                <label for="telephone">Telephone :</label>
+                <input class="inactive" disabled type="text" name="telephone" placeholder="{{ profile.telephone }}">
+            </div>
+            <div class="labelInput-container">
+                <label for="mail">Adresse email :</label>
+                <input class="inactive" disabled type="email" name="mail" placeholder="{{ profile.mail }}">
+            </div>
+            <div class="labelInput-container">
+                <label for="expire">Date de fin de formation :</label>
+                <input type="text" disabled class="inactive datepicker" name="expire" placeholder="{{ profile.expire }}">
+            </div>
+            {#<div class="labelInput-container">
+                <label for="expire">Etablissement :</label>#}
+                {#<select name="etablishment" id='etablishments'>
+                    {% for establishment in establishments %}
+                        <option value= {{ establishment.ID }} >{{ establishment.name }}</option>
+                    {% endfor %}
+                </select>#}
+            {#</div>#}
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+        <h2>L'utilisateur {{ username }} n'existe pas.</h2>
+    {% endif %}
+{% endblock %}
