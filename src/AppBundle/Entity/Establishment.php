@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Establishment
  *
- * @ORM\Table(name="establishment")
+ * @ORM\Table(name="establishment", indexes={@ORM\Index(name="region", columns={"region"})})
  * @ORM\Entity
  */
 class Establishment
@@ -22,21 +22,14 @@ class Establishment
     /**
      * @var string
      *
-     * @ORM\Column(name="region", type="string", length=128, nullable=false)
-     */
-    private $region;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="address", type="string", length=512, nullable=false)
      */
     private $address;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="postal", type="decimal", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="postal", type="integer", nullable=false)
      */
     private $postal;
 
@@ -55,6 +48,16 @@ class Establishment
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
+    /**
+     * @var \AppBundle\Entity\Region
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Region")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="region", referencedColumnName="id")
+     * })
+     */
+    private $region;
 
 
 
@@ -80,30 +83,6 @@ class Establishment
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set region
-     *
-     * @param string $region
-     *
-     * @return Establishment
-     */
-    public function setRegion($region)
-    {
-        $this->region = $region;
-
-        return $this;
-    }
-
-    /**
-     * Get region
-     *
-     * @return string
-     */
-    public function getRegion()
-    {
-        return $this->region;
     }
 
     /**
@@ -133,7 +112,7 @@ class Establishment
     /**
      * Set postal
      *
-     * @param string $postal
+     * @param integer $postal
      *
      * @return Establishment
      */
@@ -147,7 +126,7 @@ class Establishment
     /**
      * Get postal
      *
-     * @return string
+     * @return integer
      */
     public function getPostal()
     {
@@ -186,5 +165,29 @@ class Establishment
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set region
+     *
+     * @param \AppBundle\Entity\Region $region
+     *
+     * @return Establishment
+     */
+    public function setRegion(\AppBundle\Entity\Region $region = null)
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * Get region
+     *
+     * @return \AppBundle\Entity\Region
+     */
+    public function getRegion()
+    {
+        return $this->region;
     }
 }

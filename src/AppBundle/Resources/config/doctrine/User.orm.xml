@@ -22,11 +22,6 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="plainpassword" type="string" column="plainpassword" length="128" nullable="false">
-      <options>
-        <option name="fixed"/>
-      </options>
-    </field>
     <field name="password" type="string" column="password" length="256" nullable="false">
       <options>
         <option name="fixed"/>
@@ -43,6 +38,11 @@
       </options>
     </field>
     <field name="expire" type="datetime" column="expire" nullable="true"/>
+    <field name="plainpassword" type="string" column="plainpassword" length="128" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
     <many-to-one field="establishment" target-entity="Establishment" fetch="LAZY">
       <join-columns>
         <join-column name="establishment" referenced-column-name="id"/>

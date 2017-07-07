@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Establishment
  *
- * @ORM\Table(name="establishment")
+ * @ORM\Table(name="establishment", indexes={@ORM\Index(name="region", columns={"region"})})
  * @ORM\Entity
  */
 class Establishment
@@ -22,21 +22,14 @@ class Establishment
     /**
      * @var string
      *
-     * @ORM\Column(name="region", type="string", length=128, nullable=false)
-     */
-    private $region;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="address", type="string", length=512, nullable=false)
      */
     private $address;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="postal", type="decimal", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="postal", type="integer", nullable=false)
      */
     private $postal;
 
@@ -56,135 +49,16 @@ class Establishment
      */
     private $id;
 
-
-
     /**
-     * Set name
+     * @var \AppBundle\Entity\Region
      *
-     * @param string $name
-     *
-     * @return Establishment
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Region")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="region", referencedColumnName="id")
+     * })
      */
-    public function setName($name)
-    {
-        $this->name = $name;
+    private $region;
 
-        return $this;
-    }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set region
-     *
-     * @param string $region
-     *
-     * @return Establishment
-     */
-    public function setRegion($region)
-    {
-        $this->region = $region;
-
-        return $this;
-    }
-
-    /**
-     * Get region
-     *
-     * @return string
-     */
-    public function getRegion()
-    {
-        return $this->region;
-    }
-
-    /**
-     * Set address
-     *
-     * @param string $address
-     *
-     * @return Establishment
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * Get address
-     *
-     * @return string
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
-     * Set postal
-     *
-     * @param string $postal
-     *
-     * @return Establishment
-     */
-    public function setPostal($postal)
-    {
-        $this->postal = $postal;
-
-        return $this;
-    }
-
-    /**
-     * Get postal
-     *
-     * @return string
-     */
-    public function getPostal()
-    {
-        return $this->postal;
-    }
-
-    /**
-     * Set city
-     *
-     * @param string $city
-     *
-     * @return Establishment
-     */
-    public function setCity($city)
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    /**
-     * Get city
-     *
-     * @return string
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }
+

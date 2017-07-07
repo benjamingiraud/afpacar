@@ -321,4 +321,3 @@ class User implements UserInterface, Serializable
         return $user->getUsername() == $this->getUsername();
     }
 }
-

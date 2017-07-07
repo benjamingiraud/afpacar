@@ -22,10 +22,7 @@ header {
     box-shadow: 0 0 10px #6ED023;
     padding: 0.25em 0;
 }
-header img {
-    width: 50%;
-    height-auto;
-}
+
 div.header-container {
     width: 90%;
     margin: auto;
