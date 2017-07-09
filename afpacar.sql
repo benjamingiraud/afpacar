@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
--- http://www.phpmyadmin.net
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 07, 2017 at 11:39 AM
--- Server version: 5.7.18-0ubuntu0.16.04.1
--- PHP Version: 7.0.15-0ubuntu0.16.04.4
+-- Generation Time: Jul 09, 2017 at 08:01 PM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -23,6 +25,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `advert_type`
+--
+
+CREATE TABLE `advert_type` (
+  `id` int(11) NOT NULL,
+  `type` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `advert_type`
+--
+
+INSERT INTO `advert_type` (`id`, `type`) VALUES
+(1, 'Offre'),
+(2, 'Demande');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `carpooling`
 --
 
@@ -31,8 +52,18 @@ CREATE TABLE `carpooling` (
   `user` int(11) DEFAULT NULL,
   `establishment` int(11) DEFAULT NULL,
   `description` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL
+  `type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `carpooling`
+--
+
+INSERT INTO `carpooling` (`id`, `user`, `establishment`, `description`, `type`) VALUES
+(12, 10, 8, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', 1),
+(15, 10, 8, '(hytgrergb', 2),
+(16, 10, 4, 'C´est un fameux trois-mâts fin comme un oiseau\r\nHissez haut Santiano !\r\nDix huit nœuds, quatre cents tonneaux\r\nJe suis fier d´y être matelot!', 2),
+(17, 10, 8, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', 1);
 
 -- --------------------------------------------------------
 
@@ -149,13 +180,14 @@ INSERT INTO `region` (`id`, `region`) VALUES
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `username` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(64) NOT NULL,
   `firstname` varchar(64) DEFAULT NULL,
   `lastname` varchar(64) DEFAULT NULL,
   `password` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `telephone` int(11) DEFAULT NULL,
   `mail` varchar(64) NOT NULL,
   `expire` datetime DEFAULT NULL,
+  `region` int(11) DEFAULT NULL,
   `establishment` int(11) DEFAULT NULL,
   `plainpassword` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -164,12 +196,19 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `firstname`, `lastname`, `password`, `telephone`, `mail`, `expire`, `establishment`, `plainpassword`) VALUES
-(5, 'Root', NULL, NULL, '$2y$13$PqAqtRGkXBK9zFaasroQg.fHdP6DgooFqcTxTw77ONMk4qsEzyZbS', NULL, 'root@email.com', NULL, NULL, 'admin');
+INSERT INTO `user` (`id`, `username`, `firstname`, `lastname`, `password`, `telephone`, `mail`, `expire`, `region`, `establishment`, `plainpassword`) VALUES
+(5, 'root', NULL, NULL, '$2y$13$PqAqtRGkXBK9zFaasroQg.fHdP6DgooFqcTxTw77ONMk4qsEzyZbS', NULL, 'root@email.com', NULL, NULL, NULL, 'admin'),
+(10, 'Benjamin', NULL, NULL, '$2y$13$pd.wx003ljIhfm6CEcONzePT0ysnn6zNewyQtw5txUkNjZZ9ppFnO', NULL, 'benjamingiraud@hotmail.fr', '2018-01-29 00:00:00', 13, NULL, 'admin');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `advert_type`
+--
+ALTER TABLE `advert_type`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `carpooling`
@@ -177,7 +216,8 @@ INSERT INTO `user` (`id`, `username`, `firstname`, `lastname`, `password`, `tele
 ALTER TABLE `carpooling`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_etablishmentID` (`establishment`),
-  ADD KEY `FK_userID` (`user`);
+  ADD KEY `FK_userID` (`user`),
+  ADD KEY `FK_advertID` (`type`);
 
 --
 -- Indexes for table `establishment`
@@ -197,17 +237,23 @@ ALTER TABLE `region`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_8D93D649DBEFB1EE` (`establishment`);
+  ADD KEY `IDX_8D93D649DBEFB1EE` (`establishment`),
+  ADD KEY `FK_user_region_id` (`region`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `advert_type`
+--
+ALTER TABLE `advert_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `carpooling`
 --
 ALTER TABLE `carpooling`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `establishment`
 --
@@ -222,7 +268,7 @@ ALTER TABLE `region`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- Constraints for dumped tables
 --
@@ -231,6 +277,7 @@ ALTER TABLE `user`
 -- Constraints for table `carpooling`
 --
 ALTER TABLE `carpooling`
+  ADD CONSTRAINT `FK_advertID` FOREIGN KEY (`type`) REFERENCES `advert_type` (`id`),
   ADD CONSTRAINT `FK_etablishmentID` FOREIGN KEY (`establishment`) REFERENCES `establishment` (`id`),
   ADD CONSTRAINT `FK_userID` FOREIGN KEY (`user`) REFERENCES `user` (`id`);
 
@@ -244,7 +291,9 @@ ALTER TABLE `establishment`
 -- Constraints for table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `FK_8D93D649DBEFB1EE` FOREIGN KEY (`establishment`) REFERENCES `establishment` (`id`);
+  ADD CONSTRAINT `FK_8D93D649DBEFB1EE` FOREIGN KEY (`establishment`) REFERENCES `establishment` (`id`),
+  ADD CONSTRAINT `FK_user_region_id` FOREIGN KEY (`region`) REFERENCES `region` (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

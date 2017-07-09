@@ -3,6 +3,7 @@
   <entity name="AppBundle\Entity\User" table="user">
     <indexes>
       <index name="IDX_8D93D649DBEFB1EE" columns="establishment"/>
+      <index name="FK_user_region_id" columns="region"/>
     </indexes>
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
@@ -46,6 +47,11 @@
     <many-to-one field="establishment" target-entity="Establishment" fetch="LAZY">
       <join-columns>
         <join-column name="establishment" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="region" target-entity="Region" fetch="LAZY">
+      <join-columns>
+        <join-column name="region" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
   </entity>

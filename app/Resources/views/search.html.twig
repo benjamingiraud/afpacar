@@ -15,16 +15,16 @@
     {% for establishment in establishments %} 
             <div class="etablishment-container fixmyproblems">
                 <div class="etinfos-container">
-                    <h2>{{ establishment.name }}</h2>
+                    <h2 class="lightgreen">{{ establishment.name }}</h2>
                     <p>{{ establishment.address }}</p>
                     <p>{{ establishment.postal }} {{ establishment.city }} </p>
                 </div>
-                <div class="redirect-container">
-                    <a class="logo coollinks redirect" 
-                       href="{{ path('advert', {'region': establishment.name|lower|replace(' ', '-'), 'id' : establishment.id}) }}">
-                       Voir la fiche de covoiturage
-                    </a>
-                </div>
+                <form action= "{{ path('advert', {'region': establishment.name|lower|replace(' ', '-')}) }}" 
+                      method="post"
+                      class="redirect-container margin-right">
+                    <input type="hidden" name="establishment_id" value= {{establishment.id}} />
+                    <button class="logo redirect darkgreen" type="submit">Voir la fiche de covoiturage !</button>
+                </form>
             </div>
     {% endfor %}
     </div>

@@ -1,58 +1,51 @@
 {% extends 'template.html.twig' %}
 {% block main %}
     <div class="column-wrapper">
+        <div class="title-container">
         <h1 class="logo signup darkgreen">Créer un compte</h1>
-        <span class="tip lightgreen"><i>Les champs suivis d'un <b class="darkgreen">*</b> sont obligatoires</i></span>
-        
+        </div>
+        <span class="warning tip logo lightgreen"><i>Tout les champs suivants sont obligatoires.</i></span>
+        {% if not form.vars.valid %}
+        <div class="dialog" title="Echec lors de la création du compte">
+            <ul>
+            {% for child in form.children %}
+                {# Display the errors of the form item #}
+                {%for error in child.vars.errors%}
+                    <li>{{error.message}}</li>
+                {%endfor%}
+            {%endfor%}
+            </ul>
+       </div>
+        {% endif %}
         {{ form_start(form, {'attr': {'class': 'column-wrapper'} }) }}
-        {{ form_row(form.username) }}
-        {{ form_row(form.mail) }}
-        {{ form_row(form.plainPassword.first) }}
-        {{ form_row(form.plainPassword.second) }}
-{#        {{ form_row(form.establishment, {'attr' : {'class' : 'datepicker' } }) }}
-#}
-        <button class='inputfont' type="submit">Créez votre compte!</button>
-        
+            <div>
+            {{ form_label(form.username) }}
+            {{ form_widget(form.username) }}
+            </div>
+            <div>
+            {{ form_label(form.mail) }}
+            {{ form_widget(form.mail) }}
+            </div>
+            <div>
+            {{ form_label(form.plainPassword.first) }}
+            {{ form_widget(form.plainPassword.first) }}
+            </div>
+            <div>
+            {{ form_label(form.plainPassword.second) }}
+            {{ form_widget(form.plainPassword.second) }}
+            </div>
+            <div>
+            {{ form_label(form.region) }}
+            {{ form_widget(form.region) }}
+            </div>
+            <div>
+            {{ form_label(form.expire) }}
+            {{ form_widget(form.expire) }}
+            </div>
+            <div class="subtmit-container">
+                <button class='inputfont' type="submit">Créez votre compte!</button>
+            </div>
         {{ form_end(form) }}
-        {#<form class="column-wrapper" method="post" action="{{ path('register') }}">
-            <span class="legend">Pseudo<b class="darkgreen">* </b>:</span>
-            <input type="text" name="username" required/>
-
-            <span class="legend">Mot de passe<b class="darkgreen">* </b>:</span>
-            <input type="password" name="password" required />
-
-            <span class="legend">Region :</span>
-            <select name="region" id='region'>
-                
-            </select>
-
-            <span class="legend">Etablissement :</span>
-            <select name="etablishment" id='etablishments'>
-                {% for establishment in establishments %}
-                    <option value= {{ establishment.ID }} >{{ establishment.name }}</option>
-                {% endfor %}
-            </select>
-
-            <span class="legend">Prénom :</span>
-            <input type="text" name="firstname" />
-
-            <span class="legend">Nom :</span>
-            <input type="text" name="lastname" />
-
-            <span class="legend">Telephone :</span>
-            <input type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" 
-                   name="telephone" />
-
-            <span class="legend">Formation :</span>
-            <input type="text" name="formation" />
-
-            <span class="legend">Mail :</span>
-            <input type="email" name="mail" />
-
-            <span class="legend">Date de fin de formation<b class="darkgreen">* </b>:</span>
-            <input type="text" name="expire" class="datepicker" size="30" required>
-
-            <input class="inputfont" type="submit" value="S'enregister" />
-        </form>#}
+        
     </div>
 {% endblock %}

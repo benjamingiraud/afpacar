@@ -1,10 +1,19 @@
-
+html {
+    width: 100%;
+    height: 100%;
+}
 body {
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 400;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    
 }
 .fontAwesome {
     font-family: 'FontAwesome';
@@ -13,16 +22,35 @@ body {
     font-family: 'Raleway';
     font-weight: bold;
 }
-
+#page-mask {
+    background: rgba(0, 0, 0, 0.75);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: none;
+}
+.dialog {
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    z-index: 1001;
+}
+.ui-front {
+    z-index: 1001 !important;
+}
 header {
     position: sticky;
-    top: 0px;
+    top: 0;
     background-color: #FFFFFF;
     border-bottom: 1px solid #6ED023;
     box-shadow: 0 0 10px #6ED023;
     padding: 0.25em 0;
+    z-index: 999;
 }
-
 div.header-container {
     width: 90%;
     margin: auto;
@@ -30,17 +58,26 @@ div.header-container {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    
+}
+#sticky-wrapper {
 }
 .logoinline{
     font-family: FontAwesome;
     font-style: normal;
     font-weight: normal;
 }
+.logosite {
+    width: auto;
+}
 .coollinks {
     text-decoration: none;
     padding: 1em;
     color: #6ED023;
     transition: 0.33s all ease-out;
+}
+.redirect {
+    font-weight: bolder;
 }
 .coollinks:nth-child(odd):hover {
     background-color: #6ED023;
@@ -54,12 +91,14 @@ div.header-container {
     color:white;
 }
 div.main-container {
+    flex: 1;
     width: 80%;
-    margin: 2em auto;
+    margin: auto;
+    align-self: flex-start;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: stretch;
+    align-items: center;
 }
 div.search-container {
     flex: 1;
@@ -88,6 +127,16 @@ input[name=search] {
 .lightgreen {
     color: #6ED023;
 }
+.title-container {
+    text-align: center;
+    width: 100%;
+    border-bottom: 2px solid #44A33D;
+}
+.subtmit-container {
+    width: 100%;
+    margin: auto;
+    border-top: 2px solid #44A33D;
+}
 .formsearch {
     margin: 2em 0;
     width: 100%;
@@ -105,6 +154,7 @@ input[name=search] {
 }
 /*Signin page*/
 .column-wrapper {
+    width: 50%;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -112,28 +162,31 @@ input[name=search] {
     align-items: center;
 }
 form.column-wrapper {
-    margin-top: 2em;
+    width: 100%;
+    margin-top: 1em;
     align-items: stretch;
 }
-form.column-wrapper div {
+form.column-wrapper div:not(:last-of-type) {
     display: flex;
     flex-direction: column;
+    width: 50%;
+    margin: auto;
 }
 form.column-wrapper div:not(:last-of-type) {
     margin-top: 0.5em;
     margin-bottom: 1em;
 }
 form.column-wrapper div:last-of-type {
-    margin-bottom: 2em;
+    margin-top: 2em;
 }
 form.column-wrapper label {
     margin-bottom: 0.25em;
 }
 form.column-wrapper button {
     cursor: pointer;
-    margin-top: 2em;
     text-decoration: none;
     text-align: center;
+    margin-top: 2em;
     padding: 1.5em;
     background-color: #44A33D;
     transition: 0.33s all ease-out;
@@ -147,15 +200,15 @@ form.column-wrapper button:hover {
 select {
     margin-bottom: 1em;
 }
-
+span.tip {
+    margin-top: 2em;
+}
 
 /* JQUERY UI */
-#etablishments-button, #region-button {
+#etablishments-button, #user_region-button, #appbundle_carpooling_type-button {
     padding: 0.5em 0;
     width: 100%;
     border-radius: 0;
-    margin-top: 0.5em;
-    margin-bottom: 1em;
     font-size: 1em;
 }
 .ui-selectmenu-icon {
@@ -178,6 +231,7 @@ div.ui-tooltip {
 .etablishment-container {
     display: flex;
     flex-direction: column;
+    padding-bottom: 0.25em;
 }
 .sumup {
     width: 100%;
@@ -194,7 +248,10 @@ div.ui-tooltip {
     align-items: center;
 }
 .etablishment-container:not(:last-of-type) {
-    border-bottom: 1px solid #6ED023;
+    border-bottom: 1px solid #44A33D;
+}
+.etablishment-container:not(:first-of-type) {
+    margin-top: 1em;
 }
 .etinfos-container, .coordonate {
     display: flex;
@@ -209,6 +266,12 @@ div.ui-tooltip {
     justify-content: center;
     align-items: center;
 }
+.margin-right {
+    margin-right: 1em;
+}
+.margin-top {
+    margin-top: 2em;
+}
 h2 {
     margin: 0.25em 0 0.5em 0;
     padding: 0;
@@ -221,7 +284,6 @@ h2 {
 }
 .etablishment-container a, .etablishment-container button {
     text-decoration: none;
-    color: #44A33D;
     background-color: #FFFFFF;
 }
 
@@ -236,6 +298,7 @@ h2 {
 
 ojscjkblazs=x;
 */
+
 .newcarpooling {
     text-decoration: none;
     text-align: center;
@@ -244,7 +307,7 @@ ojscjkblazs=x;
     transition: 0.33s all ease-out;
     color: #FFFFFF;
     border: 1px solid #44A33D;
-    width: 100%;
+    margin-top: 2em;
 }
 .newcarpooling:hover{
     background-color: #6ED023;
@@ -253,11 +316,11 @@ ojscjkblazs=x;
     font-size: 125%;
 }
 .choice-container {
-   display: flex;
-   flex-direction: row;
-   justify-content:center;
-   width: 100%;
-   margin-bottom: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    width: 100%;
+    margin-bottom: 2em;
 }
 button {
     font-family: 'Raleway';
@@ -278,8 +341,12 @@ button {
     background-color: #44A33D;
     padding: 1em;
 }
-.selected {
-    
+.dialog ul, .dialog li {
+    text-decoration: none;
+    list-style: none;
+    color: #FFFFFF;
+    margin: 0.25em 0;
+    padding: 0;
 }
 .userinfo {
     display: flex;
@@ -367,4 +434,62 @@ labelInput-container label {
 #editprofile:hover {
     background-color : #44A33D;
     color: white;
+}
+button.redirect:hover {
+    color: #6ED023;
+}
+.ask-container {
+    display: none;
+}
+.keeplogged {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+input[type=checkbox].css-checkbox {
+    display:none;
+}
+
+input[type=checkbox].css-checkbox + label.css-label {
+    padding-left:20px;
+    height:15px; 
+    display:inline-block;
+    line-height:15px;
+    background-repeat:no-repeat;
+    background-position: 0 0;
+    font-size:15px;
+    vertical-align:middle;
+    cursor:pointer;
+}
+
+input[type=checkbox].css-checkbox:checked + label.css-label {
+    background-position: 0 -15px;
+}
+.css-label{ 
+    background-image:url(http://csscheckbox.com/checkboxes/lite-green-check.png);
+}
+footer {
+    margin: auto;
+}
+footer span {
+    font-size: 75%;
+    color: #44A33D;
+}
+.newadvert {
+    width: 100%;
+    padding: 1em;
+    background-color: #6ED023;
+    transition: 0.33s all ease-out;
+    color: #FFFFFF;
+}
+.newadvert:hover {
+    background-color: #44A33D;
+
+}
+textarea {
+    resize: vertical;
+    overflow: auto;
+    border: 1px solid #6ED023;
+    padding: 0.25em;
 }

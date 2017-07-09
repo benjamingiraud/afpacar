@@ -7,14 +7,11 @@
             <input id="afpasearch" name="search" type="search" placeholder="Entrez un code postal, une adresse ou une ville">
             <input id="searchyeah" class="logoinline darkgreen" type="submit" value="&#xf002" />
         </form>
-        {#{{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}#}
     </div>
     <div class="map">
         <div id="cmap"></div>
         {% block javascripts %}
-            {% javascripts 'js/map/*' %}
+            {% javascripts 'js/map/cmap.js' %}
                 <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}
