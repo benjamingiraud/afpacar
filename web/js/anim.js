@@ -1,4 +1,16 @@
-$(document).ready(function() {
+$(document).ready(function( ) {
+    $('.bxslider').bxSlider({
+        auto: true,
+        infiniteLoop: true,
+        hideControl: true,
+        mode: 'horizontal',
+        useCSS: false,
+        easing: 'easeOutElastic',
+        speed: 2000,
+        randomStart: true,
+        pager: false,
+        responsive: true
+    });
     $( ".js-datepicker" ).datepicker({
         dateFormat: "yy/mm/dd"
     });
@@ -100,5 +112,4 @@ $(document).ready(function() {
         });
         }
     });
-
 });

@@ -13,6 +13,13 @@ class IndexController extends Controller
     
     public function indexAction()
     {
-        return $this->render('index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQuery('SELECT c 
+                                   FROM AppBundle:Carpooling c 
+                                   ORDER BY c.id DESC
+                                  ');
+        $adverts = $query->setMaxResults(5)->getResult();
+        return $this->render('index.html.twig', array ('adverts' => $adverts));
     }
 }

@@ -2,18 +2,48 @@
 
 {% block main %}
     <div class="search-container">
-        <label class="logo search" for="search">Trouvez votre centre : </label>
+        <label class="logo search" for="search">Trouvez votre centre... </label>
         <form class="formsearch" method="post" action={{ path('inputsearch') }}>
             <input id="afpasearch" name="search" type="search" placeholder="Entrez un code postal, une adresse ou une ville">
             <input id="searchyeah" class="logoinline darkgreen" type="submit" value="&#xf002" />
         </form>
+        <span class="logo blabla">...et comme eux, covoiturez!</span>
+        <ul class="bxslider">
+        {% for advert in adverts %}
+            {% if advert.type.type == "Offre" %}
+                <li>
+                    <div class=slider-advert-container>
+                        <div class="slider-advert-header">
+                            Dans le {{ advert.establishment.name|lower }} :
+                        </div>
+                        <a href=""><div class="slider-advert">
+                            <h2><i class="lightgreen">{{ advert.user.username }}</i>
+                                propose du covoiturage!
+                            </h2>
+                            <p>{{ advert.description }}</p>
+                            </div></a>
+                    </div>
+                </li>
+            {% else %}
+                <li>
+                    <div class=slider-advert-container>
+                        <div class="slider-advert-header">
+                            Dans le {{ advert.establishment.name|lower }} :
+                        </div>
+                        <a href=""><div class="slider-advert">
+                            <div class="slider-advert">
+                                <h2><i class="darkgreen">{{ advert.user.username }}</i> cherche à faire du coivoiturage !</h2>
+                                <p>{{ advert.description }}</p>
+                            </div>
+                        </div></a>
+                    </div>
+                </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
     </div>
     <div class="map">
         <div id="cmap"></div>
-        {% block javascripts %}
-            {% javascripts 'js/map/cmap.js' %}
-                <script src="{{ asset_url }}"></script>
-            {% endjavascripts %}
-        {% endblock %}
+        <script src="js/map/cmap.js"></script>
     </div>
 {% endblock %}

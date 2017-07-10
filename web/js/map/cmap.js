@@ -66,7 +66,6 @@ Z13pat = "M 242,191.5 L 241.2,193.4 L 242.1,195.5 L 244.3,197 L 244.1,199.9 L 24
 
 var liste = document.getElementById("cmap");
 var cmap = '';
-cmap += '<link rel="stylesheet" href="cmap/style.css" type="text/css" media="screen" />';
 cmap += '<style>path { transition: .6s fill; fill: '+mapfill+'; }path:hover { fill: '+maphover_fill+'; }</style>';
 cmap += '<svg  version="1.1" id="Calque_1" xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" width="'+mapWidth+'" height="'+mapHeight+'" viewBox="0 0 300 300" overflow="visible" enable-background="new 0 0 300 300" xml:space="preserve">';
 for (var zone in paths) {

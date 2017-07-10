@@ -1,5 +1,13 @@
 {% extends 'template.html.twig' %}{# empty Twig template #}
 {% block main %}
+    <div id="map">
+            {% javascripts 'js/googlemap/*' %}
+                <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+            <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzt2tJdYaa2BW4xbkIMVipyKQAvuFr71w&callback=initMap">
+            </script>
+        </div>
     <div class="column-wrapper">
         <div class="title-container">
             {#{% if error %}

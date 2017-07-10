@@ -57,3 +57,7 @@
 .active::before {
     content: '\f077';
 }
+.blabla::before {
+    content: '\f075';
+    color: #6ED023;
+}

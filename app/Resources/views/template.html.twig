@@ -9,6 +9,7 @@
             {% endstylesheets %}
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type=text/css href="https://fonts.googleapis.com/css?family=Raleway"> 
+        <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/le-frog/jquery-ui.css" rel="stylesheet" />
         {% endblock %}
     </head>
     <body>
@@ -43,10 +44,11 @@
         </footer>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link type="text/css"
-        href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/le-frog/jquery-ui.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
     {% block javascripts %}
+        {% javascripts 'js/slider/*' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
         {% javascripts 'js/*' %}
             <script src="{{ asset_url }}"></script>
         {% endjavascripts %}

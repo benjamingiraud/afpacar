@@ -493,3 +493,23 @@ textarea {
     border: 1px solid #6ED023;
     padding: 0.25em;
 }
+.slider-advert {
+    padding: 0.5em;
+}
+.slider-advert-header {
+    padding: 0.5em;
+    width: 100%;
+    background-color: #6ED023;
+    color: #FFFFFF;
+}
+.slider-advert-container a {
+    text-decoration: none;
+    color: inherit;
+}
+.blabla {
+    margin-bottom: 2em;
+}
+#map {
+        height: 100%;
+        width: 100%;
+      }
