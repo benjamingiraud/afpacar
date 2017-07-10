@@ -58,6 +58,10 @@
     content: '\f077';
 }
 .blabla::before {
-    content: '\f075';
+    content: '\f0c0';
+    color: #6ED023;
+}
+.mustbelogged::before {
+    content: '\f2bd';
     color: #6ED023;
 }

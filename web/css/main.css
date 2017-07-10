@@ -102,7 +102,6 @@ div.main-container {
 }
 div.search-container {
     flex: 1;
-    padding: 1em;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -510,6 +509,20 @@ textarea {
     margin-bottom: 2em;
 }
 #map {
-        height: 100%;
-        width: 100%;
-      }
+    height: 100%;
+    width: 100%;
+}
+.loginsignupindex {
+    margin: 2em auto 2em auto;
+}
+.indexlinks {
+    text-decoration: none;
+    padding: 0.5em;
+    color: #FFFFFF;
+}
+.bg-dark {
+    background-color: #44A33D;
+}
+.bg-light {
+    background-color: #6ED023;
+}
