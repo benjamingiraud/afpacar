@@ -2,11 +2,12 @@
 
 namespace AppBundle\Entity;
 
-use Serializable;
-use Symfony\Component\Security\Core\User\UserInterface;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+use Serializable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -74,7 +75,7 @@ class User implements UserInterface, Serializable
     private $mail;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="expire", type="datetime", nullable=true)
      */
@@ -97,9 +98,9 @@ class User implements UserInterface, Serializable
     private $id;
 
     /**
-     * @var \AppBundle\Entity\Establishment
+     * @var Establishment
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Establishment")
+     * @ORM\ManyToOne(targetEntity="Establishment")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="establishment", referencedColumnName="id")
      * })
@@ -107,9 +108,9 @@ class User implements UserInterface, Serializable
     private $establishment;
 
     /**
-     * @var \AppBundle\Entity\Region
+     * @var Region
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Region")
+     * @ORM\ManyToOne(targetEntity="Region")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="region", referencedColumnName="id")
      * })
@@ -263,7 +264,7 @@ class User implements UserInterface, Serializable
     /**
      * Set expire
      *
-     * @param \DateTime $expire
+     * @param DateTime $expire
      *
      * @return User
      */
@@ -277,7 +278,7 @@ class User implements UserInterface, Serializable
     /**
      * Get expire
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getExpire()
     {
@@ -321,11 +322,11 @@ class User implements UserInterface, Serializable
     /**
      * Set establishment
      *
-     * @param \AppBundle\Entity\Establishment $establishment
+     * @param Establishment $establishment
      *
      * @return User
      */
-    public function setEstablishment(\AppBundle\Entity\Establishment $establishment = null)
+    public function setEstablishment(Establishment $establishment = null)
     {
         $this->establishment = $establishment;
 
@@ -335,7 +336,7 @@ class User implements UserInterface, Serializable
     /**
      * Get establishment
      *
-     * @return \AppBundle\Entity\Establishment
+     * @return Establishment
      */
     public function getEstablishment()
     {
@@ -345,11 +346,11 @@ class User implements UserInterface, Serializable
     /**
      * Set region
      *
-     * @param \AppBundle\Entity\Region $region
+     * @param Region $region
      *
      * @return User
      */
-    public function setRegion(\AppBundle\Entity\Region $region = null)
+    public function setRegion(Region $region = null)
     {
         $this->region = $region;
 
@@ -359,7 +360,7 @@ class User implements UserInterface, Serializable
     /**
      * Get region
      *
-     * @return \AppBundle\Entity\Region
+     * @return Region
      */
     public function getRegion()
     {

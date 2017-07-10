@@ -2,16 +2,15 @@
 
 {% block main %}
     {% if user %}
-    {% for profile in user  %}
     <div class="profile-container">
         <div class="thumbnail-container">
             <div class="username-container">
-                <h2 class="lightgreen"> {{ profile.username }}</h2>
+                <h2 class="lightgreen"> {{ user.username }}</h2>
                 {% image 'images/afpa.jpg' %}
                     <img class="thumbnail-user" src="{{ asset_url }}" />
                 {% endimage %}
             </div>
-            {% if app.user.username == profile.username %}
+            {% if app.user.username == user.username %}
                 <button id="editprofile" class="darkgreen">Editer votre profil</button>
             {% endif %}
             <a class="coollinks" href="{#{{ path('adverts', {username : user } }}#}">
@@ -22,23 +21,23 @@
         <div class="mainInfos-container">
             <div class="labelInput-container">
                 <label for="lastname">Nom :</label>
-                <input class="inactive" disabled type="text" name="lastname" placeholder="{{ profile.lastname }}">
+                <input class="inactive" disabled type="text" name="lastname" placeholder="{{ user.lastname }}">
             </div>
             <div class="labelInput-container">
                 <label for="firstname">Prénom :</label>
-                <input class="inactive" disabled type="text" name="firstname" placeholder="{{ profile.firstname }}">
+                <input class="inactive" disabled type="text" name="firstname" placeholder="{{ user.firstname }}">
             </div>
             <div class="labelInput-container">
                 <label for="telephone">Telephone :</label>
-                <input class="inactive" disabled type="text" name="telephone" placeholder="{{ profile.telephone }}">
+                <input class="inactive" disabled type="text" name="telephone" placeholder="{{ user.telephone }}">
             </div>
             <div class="labelInput-container">
                 <label for="mail">Adresse email :</label>
-                <input class="inactive" disabled type="email" name="mail" placeholder="{{ profile.mail }}">
+                <input class="inactive" disabled type="email" name="mail" placeholder="{{ user.mail }}">
             </div>
             <div class="labelInput-container">
                 <label for="expire">Date de fin de formation :</label>
-                <input type="text" disabled class="inactive datepicker" name="expire" placeholder="{{ profile.expire }}">
+                <input type="text" disabled class="inactive datepicker" name="expire" placeholder="{{ user.expire|date('Y-m-d') }}">
             </div>
             {#<div class="labelInput-container">
                 <label for="expire">Etablissement :</label>#}
@@ -50,7 +49,7 @@
             {#</div>#}
         </div>
     </div>
-    {% endfor %}
+
     {% else %}
         <h2>L'utilisateur {{ username }} n'existe pas.</h2>
     {% endif %}

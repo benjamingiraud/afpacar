@@ -15,7 +15,7 @@ class UProfileController extends Controller
     {
         $user = $this->getDoctrine()
         ->getRepository('AppBundle:User')
-        ->findByUsername($username);
+        ->findOneBy(array('username' => $username));
         return $this->render('profile.html.twig',
                 array('user' => $user,
                       'username' => $username));
