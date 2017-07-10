@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="AppBundle\Entity\Establishment" table="establishment">
+    <indexes>
+      <index name="region" columns="region"/>
+    </indexes>
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
     <field name="name" type="string" column="name" length="256" nullable="false">
-      <options>
-        <option name="fixed"/>
-      </options>
-    </field>
-    <field name="region" type="string" column="region" length="128" nullable="false">
       <options>
         <option name="fixed"/>
       </options>
@@ -19,11 +17,20 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="postal" type="decimal" column="postal" precision="10" scale="0" nullable="false"/>
+    <field name="postal" type="integer" column="postal" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
     <field name="city" type="string" column="city" length="128" nullable="false">
       <options>
         <option name="fixed"/>
       </options>
     </field>
+    <many-to-one field="region" target-entity="Region" fetch="LAZY">
+      <join-columns>
+        <join-column name="region" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
   </entity>
 </doctrine-mapping>

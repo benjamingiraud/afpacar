@@ -3,6 +3,7 @@
   <entity name="AppBundle\Entity\User" table="user">
     <indexes>
       <index name="IDX_8D93D649DBEFB1EE" columns="establishment"/>
+      <index name="FK_user_region_id" columns="region"/>
     </indexes>
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
@@ -12,12 +13,12 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="firstname" type="string" column="firstname" length="64" nullable="false">
+    <field name="firstname" type="string" column="firstname" length="64" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
     </field>
-    <field name="lastname" type="string" column="lastname" length="64" nullable="false">
+    <field name="lastname" type="string" column="lastname" length="64" nullable="true">
       <options>
         <option name="fixed"/>
       </options>
@@ -27,25 +28,30 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="telephone" type="integer" column="telephone" nullable="false">
+    <field name="telephone" type="integer" column="telephone" nullable="true">
       <options>
         <option name="unsigned"/>
       </options>
     </field>
-    <field name="formation" type="integer" column="formation" nullable="false">
+    <field name="mail" type="string" column="mail" length="64" nullable="false">
       <options>
-        <option name="unsigned"/>
+        <option name="fixed"/>
       </options>
     </field>
-    <field name="mail" type="integer" column="mail" nullable="false">
+    <field name="expire" type="datetime" column="expire" nullable="true"/>
+    <field name="plainpassword" type="string" column="plainpassword" length="128" nullable="false">
       <options>
-        <option name="unsigned"/>
+        <option name="fixed"/>
       </options>
     </field>
-    <field name="expire" type="datetime" column="expire" nullable="false"/>
     <many-to-one field="establishment" target-entity="Establishment" fetch="LAZY">
       <join-columns>
         <join-column name="establishment" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="region" target-entity="Region" fetch="LAZY">
+      <join-columns>
+        <join-column name="region" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
   </entity>

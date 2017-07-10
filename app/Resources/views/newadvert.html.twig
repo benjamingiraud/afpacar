@@ -1,0 +1,27 @@
+{% extends 'template.html.twig' %}{# empty Twig template #}
+{% block main %}
+    <div class="column-wrapper">
+        <div class="title-container">
+            {#{% if error %}
+                <div class="dialog" title="Echec de la connexion">
+                    <span>Le mot de passe et le nom d'utilisateur renseignés ne correspondent pas.</span>
+                </div>
+            {% endif %}#}
+            <h1 class="logo advert darkgreen">Nouvelle annonce</h1>
+        </div>
+        {{ form_start(form, {'attr': {'class': 'column-wrapper'} }) }}
+            <div>
+            {{ form_label(form.type) }}
+            {{ form_widget(form.type) }}
+            </div>
+            <div class="textarea-container">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+            </div>
+            <input type="hidden" name="establishment_id" value= {{id}} />
+            <div class="subtmit-container">
+                <button class='inputfont' type="submit">Créez votre annonce!</button>
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

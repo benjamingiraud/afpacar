@@ -2,59 +2,35 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Carpooling
- *
- * @ORM\Table(name="carpooling", indexes={@ORM\Index(name="FK_etablishmentID", columns={"establishment"}), @ORM\Index(name="FK_userID", columns={"user"})})
- * @ORM\Entity
  */
 class Carpooling
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=1024, nullable=false)
      */
     private $description;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=32, nullable=false)
-     */
-    private $type;
-
-    /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
+     * @var \AppBundle\Entity\AdvertType
+     */
+    private $type;
+
+    /**
      * @var \AppBundle\Entity\Establishment
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Establishment")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="establishment", referencedColumnName="id")
-     * })
      */
     private $establishment;
 
     /**
      * @var \AppBundle\Entity\User
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user", referencedColumnName="id")
-     * })
      */
     private $user;
-
 
 
     /**
@@ -82,13 +58,23 @@ class Carpooling
     }
 
     /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * Set type
      *
-     * @param string $type
+     * @param \AppBundle\Entity\AdvertType $type
      *
      * @return Carpooling
      */
-    public function setType($type)
+    public function setType(\AppBundle\Entity\AdvertType $type = null)
     {
         $this->type = $type;
 
@@ -98,21 +84,11 @@ class Carpooling
     /**
      * Get type
      *
-     * @return string
+     * @return \AppBundle\Entity\AdvertType
      */
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
@@ -163,3 +139,4 @@ class Carpooling
         return $this->user;
     }
 }
+

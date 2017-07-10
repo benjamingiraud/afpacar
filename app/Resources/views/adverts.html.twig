@@ -1,60 +1,107 @@
 {% extends "template.html.twig" %}
 
 {% block main %}
-    {% if number|number_format %}
+    {% if adverts|length %}
         <div class="list-container">
             <div class="resultat">
-                <h1>Annonce(s) de covoiturage disponible pour le <i class="lightgreen">{{ adverts[0].establishment.name }}</i></h1>
-                <h2><b class="lightgreen">{{ number }}</b> offre(s) trouvé(s)</h2>
+                <h1>Annonce(s) de covoiturage disponible pour le 
+                    <i class="lightgreen">{{ adverts[0].establishment.name }}
+                    </i>
+                </h1>
+                <h2>
+                    <b class="lightgreen">{{ adverts|length }}</b> 
+                    annonce(s) trouvé(s)
+                </h2>
             </div>
             <div class="choice-container">
-                <button class="choice offres selected">Afficher les offres de covoiturage</button>
-                <button class="choice demandes">Afficher les demandes de covoiturage</button>
+                <button id="offers" class="logo choice selected offres">
+                    Afficher les offres de covoiturage
+                </button>
+                <button id="asks" class="logo choice demandes">
+                    Afficher les demandes de covoiturage
+                </button>
             </div>
-            {% for advert in adverts if advert.type == "offre" %}
+            <div class='offers-container'>
+            {% for advert in adverts if advert.type.type == "Offre" %}
                 <div class="etablishment-container">
                     <div class='sumup'>
                         <div class="etinfos-container">
-                            <h2>Vous est offert par : <i class="lightgreen">{{ advert.user.username }}</i></h2>
+                            <h2>Vous est offert par : 
+                                <i class="lightgreen">
+                                    {{ advert.user.username }}
+                                </i>
+                            </h2>
                             <p>{{ advert.description }}</p>
                         </div>
                         <div class="redirect-container">
-                            <button class="logo menudown">Plus d'infos</button>
+                            <button class="logo menudown lightgreen">
+                                Plus d'infos
+                            </button>
                         </div>
                     </div>
                     <div class="userinfo hidden">
                         <div class='sumup'>
                             <div class='coordonate'>
-                                <p class='logo phone'>Numéro de téléphone : <b class='darkgreen'>{{ advert.user.telephone }}</b></p>
-                                <p class='logo mail'>Email : <b class='darkgreen'>{{ advert.user.mail }}</b></p>
-                                <p class='logo date'>Fini sa formation le   : <b class='darkgreen'>{{ advert.user.expire|date('d/m/Y') }}</b></p>
+                                <p class='logo phone lightgreen'><span class='black'>Numéro de téléphone : </span><b>{{ advert.user.telephone }}</b></p>
+                                <p class='logo mail lightgreen'><span class='black'>Email : </span><b>{{ advert.user.mail }}</b></p>
+                                <p class='logo date lightgreen'><span class='black'>Fini sa formation le   : </span><b>{{ advert.user.expire|date('d/m/Y') }}</b></p>
                             </div>
-                            <a class="logo redirect alignselft" href=''>Ca m'intéresse!</a>
+                            <a class="logo redirect alignselft lightgreen" href=''>Ca m'intéresse!</a>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-            {% for advert in adverts if advert.type == "demande" %}
+            {% else %}
                 <div class="etablishment-container">
-                    <div class='sumup'>
-                        <div class="etinfos-container">
-                            <h2><i class="darkgreen">{{ advert.user.username }}</i> cherche à faire du coivoiturage !</h2>
-                            <p>{{ advert.description }}</p>
-                        </div>
-                        <div class="redirect-container">
-                            <button class="logo menudown">Plus d'infos</button>
-                            {#<a class="logo redirect" href=''>Je lui propose du covoiturage!</a>#}
-                        </div>
-                    </div>
+                    <h2>Aucune offre de covoiturage pour le moment</h2>
                 </div>
             {% endfor %}
+            </div>
+            <div class='ask-container'>
+            {% for advert in adverts if advert.type.type == "Demande" %}
+                    <div class="etablishment-container">
+                        <div class='sumup'>
+                            <div class="etinfos-container">
+                                <h2><i class="darkgreen">{{ advert.user.username }}</i> cherche à faire du coivoiturage !</h2>
+                                <p>{{ advert.description }}</p>
+                            </div>
+                            <div class="redirect-container">
+                                <button class="logo menudown darkgreen">Plus d'infos</button>
+                            </div>
+                        </div>
+                        <div class="userinfo hidden">
+                            <div class='sumup'>
+                                <div class='coordonate'>
+                                    <p class='logo phone darkgreen'><span class='black'>Numéro de téléphone : </span><b>{{ advert.user.telephone }}</b></p>
+                                    <p class='logo mail darkgreen'><span class='black'>Email : </span><b>{{ advert.user.mail }}</b></p>
+                                    <p class='logo date darkgreen'><span class='black'>Fini sa formation le   : </span><b>{{ advert.user.expire|date('d/m/Y') }}</b></p>
+                                </div>
+                                <a class="logo redirect alignselft darkgreen" href=''>Je lui propose du covoiturage!</a>
+                            </div>
+                        </div>
+                    </div>
+            {% else %}
+                    <div class="etablishment-container">
+                        <h2>Aucune demande de covoiturage pour le moment</h2>
+                    </div>
+            {% endfor %}
+            </div>
+            <form action= "{{ path('new_advert', {'region': region}) }}" 
+                method="post" class="redirect-container margin-top">
+                <input type="hidden" name="establishment_id" value= {{ establishmentID }} />
+                <button class="logo newadvert" type="submit">Créez votre propre annonce de covoiturage !</button>
+            </form>
         </div>
     {% else %}
         <div class="list-container">
                 <div class="resultat">
-                    <h2>Aucun co-voiturage disponible pour le moment pour le <i class="lightgreen">{{ region }}</i></h2>
+                    <h2>Aucune annonce de co-voiturage disponible pour le </h2>
                 </div>                        
-                <a class="logo car newcarpooling" href="index.php?page=addcarpooling&etablishment=' . $currentEtablishment . '">Soyez alors le premier a proposer du covoiturage!</a>
+                 <form action= "{{ path('new_advert', {'region': region}) }}" 
+                      method="post"
+                      class="redirect-container margin-top">
+                    <input type="hidden" name="establishment_id" value= {{ establishmentID }} />
+                    <button class="logo newadvert" type="submit">Soyez alors le premier à créer une annonce !</button>
+                </form>
           </div>';
     {% endif %}
 {% endblock %}

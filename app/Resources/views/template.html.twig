@@ -7,27 +7,28 @@
             {% stylesheets 'css/*' filter='cssrewrite' %}
                 <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
-        {% endblock %}
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type=text/css href="https://fonts.googleapis.com/css?family=Raleway"> 
+        {% endblock %}
     </head>
     <body>
-        <header>
+        <div id="page-mask"></div>
+        <header class="float-panel">
             <div class= "header-container">
                 <a class="logosite" href="{{ path('index') }}">
                     {% image 'images/logo.jpg' %}
-                        <img src="{{ asset_url }}" alt="Example" />
+                        <img id="afpacarlogo" src="{{ asset_url }}" alt="Example" />
                     {% endimage %}
                 </a>
                 <div class="log-container">
                      {% if app.user %}
-                            <a class="logo signin" href="{#{{ path('profile') }}#}">{{ app.user.username }}</a>
-                            <a class="logoinline" href="{{ path('logout') }}">&#xf011</a>
-                            <a class="logoinline" href="{#{{ path('privatemessage') }}#}">&#xf0e0</a>
-                            <a class="logoinline" href="{#{{ path('carpoolings') }}#}">&#xf1b9</a>
+                            <a class="logo signin coollinks" href="{{ path('profile', { username : app.user.username }) }}">{{ app.user.username }}</a>
+                            <a class="logoinline coollinks" href="{{ path('logout') }}">&#xf011</a>
+                            <a class="logoinline coollinks" href="{#{{ path('privatemessage') }}#}">&#xf0f3</a>
+                            <a class="logoinline coollinks" href="{#{{ path('carpoolings') }}#}">&#xf1b9</a>
                       {% else %}
-                            <a class="logo signin" href="{{ path('login') }}">Connectez-vous</a>
-                            <a class="logo signup" href="{{ path('register') }}">Créez un compte</a>
+                            <a class="logo signin coollinks" href="{{ path('login') }}">Connectez-vous</a>
+                            <a class="logo signup coollinks" href="{{ path('register') }}">Créez un compte</a>
                        {% endif %}     
                 </div>
             </div>
@@ -37,7 +38,9 @@
                 
             {% endblock %}
         </div>
-        
+        <footer>
+            <span class="footer">@Copyright</span>
+        </footer>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link type="text/css"

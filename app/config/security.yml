@@ -8,14 +8,18 @@ security:
         AppBundle\Entity\User: bcrypt
         
     firewalls:
-        secured_area:
+        main:
             anonymous: ~
             form_login:
-                login_path:  /login
-                check_path:  /login
+                login_path: /login
+                check_path: /login
             logout: { path: /logout, target: / }
- 
+            remember_me:
+                secret: '%secret%'
+                lifetime: 604800
+                #always_remember_me: true
+                    
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/annonce/new, roles: ROLE_USER }
+        - { path: ^/adverts/*, roles: ROLE_USER }

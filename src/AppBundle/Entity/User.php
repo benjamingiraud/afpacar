@@ -2,14 +2,27 @@
 
 namespace AppBundle\Entity;
 
-use DateTime;
-use Doctrine\ORM\Mapping as ORM;
 use Serializable;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * User
  *
- * @ORM\Table(name="user", indexes={@ORM\Index(name="IDX_8D93D649DBEFB1EE", columns={"establishment"})})
+ * @UniqueEntity(
+ *     fields={"username"},
+ *     errorPath="username",
+ *     message="Nom d'utilisateur non disponible car déjà utilisé."
+ * )
+ * @UniqueEntity(
+ *     fields={"mail"},
+ *     errorPath="mail",
+ *     message="Un utilisateur existe déjà avec l'email renseigné.",
+ * )
+ * 
+ * @ORM\Table(name="user", indexes={@ORM\Index(name="IDX_8D93D649DBEFB1EE", columns={"establishment"}), @ORM\Index(name="FK_user_region_id", columns={"region"})})
  * @ORM\Entity
  */
 class User implements UserInterface, Serializable
@@ -24,14 +37,14 @@ class User implements UserInterface, Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string", length=64, nullable=false)
+     * @ORM\Column(name="firstname", type="string", length=64, nullable=true)
      */
     private $firstname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lastname", type="string", length=64, nullable=false)
+     * @ORM\Column(name="lastname", type="string", length=64, nullable=true)
      */
     private $lastname;
 
@@ -45,11 +58,15 @@ class User implements UserInterface, Serializable
     /**
      * @var integer
      *
-     * @ORM\Column(name="telephone", type="integer", nullable=false)
+     * @ORM\Column(name="telephone", type="integer", nullable=true)
      */
     private $telephone;
 
     /**
+     * @Assert\Email(
+     *      message = "L'email '{{ value }}' n'est pas valide.",
+     *      checkMX = true
+     * )
      * @var string
      *
      * @ORM\Column(name="mail", type="string", length=64, nullable=false)
@@ -57,11 +74,18 @@ class User implements UserInterface, Serializable
     private $mail;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      *
-     * @ORM\Column(name="expire", type="datetime", nullable=false)
+     * @ORM\Column(name="expire", type="datetime", nullable=true)
      */
     private $expire;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="plainpassword", type="string", length=128, nullable=false)
+     */
+    private $plainpassword;
 
     /**
      * @var integer
@@ -73,16 +97,24 @@ class User implements UserInterface, Serializable
     private $id;
 
     /**
-     * @var Establishment
+     * @var \AppBundle\Entity\Establishment
      *
-     * @ORM\ManyToOne(targetEntity="Establishment")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Establishment")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="establishment", referencedColumnName="id")
      * })
      */
     private $establishment;
 
-
+    /**
+     * @var \AppBundle\Entity\Region
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Region")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="region", referencedColumnName="id")
+     * })
+     */
+    private $region;
 
     /**
      * Set username
@@ -207,7 +239,7 @@ class User implements UserInterface, Serializable
     /**
      * Set mail
      *
-     * @param integer $mail
+     * @param string $mail
      *
      * @return User
      */
@@ -221,7 +253,7 @@ class User implements UserInterface, Serializable
     /**
      * Get mail
      *
-     * @return integer
+     * @return string
      */
     public function getMail()
     {
@@ -231,7 +263,7 @@ class User implements UserInterface, Serializable
     /**
      * Set expire
      *
-     * @param DateTime $expire
+     * @param \DateTime $expire
      *
      * @return User
      */
@@ -245,11 +277,35 @@ class User implements UserInterface, Serializable
     /**
      * Get expire
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getExpire()
     {
         return $this->expire;
+    }
+
+    /**
+     * Set plainpassword
+     *
+     * @param string $plainpassword
+     *
+     * @return User
+     */
+    public function setPlainpassword($plainpassword)
+    {
+        $this->plainpassword = $plainpassword;
+
+        return $this;
+    }
+
+    /**
+     * Get plainpassword
+     *
+     * @return string
+     */
+    public function getPlainpassword()
+    {
+        return $this->plainpassword;
     }
 
     /**
@@ -265,11 +321,11 @@ class User implements UserInterface, Serializable
     /**
      * Set establishment
      *
-     * @param Establishment $establishment
+     * @param \AppBundle\Entity\Establishment $establishment
      *
      * @return User
      */
-    public function setEstablishment(Establishment $establishment = null)
+    public function setEstablishment(\AppBundle\Entity\Establishment $establishment = null)
     {
         $this->establishment = $establishment;
 
@@ -279,43 +335,37 @@ class User implements UserInterface, Serializable
     /**
      * Get establishment
      *
-     * @return Establishment
+     * @return \AppBundle\Entity\Establishment
      */
     public function getEstablishment()
     {
         return $this->establishment;
     }
-    /**
-     * @var integer
-     */
-    private $formation;
-
 
     /**
-     * Set formation
+     * Set region
      *
-     * @param integer $formation
+     * @param \AppBundle\Entity\Region $region
      *
      * @return User
      */
-    public function setFormation($formation)
+    public function setRegion(\AppBundle\Entity\Region $region = null)
     {
-        $this->formation = $formation;
+        $this->region = $region;
 
         return $this;
     }
 
     /**
-     * Get formation
+     * Get region
      *
-     * @return integer
+     * @return \AppBundle\Entity\Region
      */
-    public function getFormation()
+    public function getRegion()
     {
-        return $this->formation;
+        return $this->region;
     }
-    
-   public function eraseCredentials() {
+    public function eraseCredentials() {
         
     }
     public function getRoles() {
@@ -347,5 +397,4 @@ class User implements UserInterface, Serializable
     {
         return $user->getUsername() == $this->getUsername();
     }
-
 }

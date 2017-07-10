@@ -16,13 +16,11 @@ class SearchController extends Controller
     {
        $em = $this->getDoctrine()->getManager();
         
-       $query = $em->createQuery('SELECT e
+       $query = $em->createQuery('SELECT e, r 
                                   FROM AppBundle:Establishment e
-                                  WHERE e.address LIKE :test
-                                  OR    e.postal  LIKE :test
-                                  OR    e.region  LIKE :test
-                                  OR    e.city    LIKE :test
-                                ')->setParameter("test", '%' . $filter . '%');
+                                  JOIN e.region r
+                                  WHERE r.region = :region'
+                                 )->setParameter('region', $filter);
 
       $establishments = $query->getResult();
       $queryNumber    = count($establishments);
@@ -43,11 +41,12 @@ class SearchController extends Controller
        $filter = $request->request->get('search');
        $em = $this->getDoctrine()->getManager();
         
-       $query = $em->createQuery('SELECT e
+       $query = $em->createQuery('SELECT e, r
                                   FROM AppBundle:Establishment e
+                                  JOIN e.region r
                                   WHERE e.address LIKE :test
+                                  OR    r.region  LIKE :test
                                   OR    e.postal  LIKE :test
-                                  OR    e.region  LIKE :test
                                   OR    e.city    LIKE :test
                                   OR    e.name    LIKE :test
                                 ')->setParameter("test", '%' . $filter . '%');

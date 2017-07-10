@@ -4,6 +4,7 @@
     <indexes>
       <index name="FK_etablishmentID" columns="establishment"/>
       <index name="FK_userID" columns="user"/>
+      <index name="FK_advertID" columns="type"/>
     </indexes>
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
@@ -13,11 +14,11 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="type" type="string" column="type" length="32" nullable="false">
-      <options>
-        <option name="fixed"/>
-      </options>
-    </field>
+    <many-to-one field="type" target-entity="AdvertType" fetch="LAZY">
+      <join-columns>
+        <join-column name="type" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
     <many-to-one field="establishment" target-entity="Establishment" fetch="LAZY">
       <join-columns>
         <join-column name="establishment" referenced-column-name="id"/>
