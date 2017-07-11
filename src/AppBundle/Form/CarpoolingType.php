@@ -7,6 +7,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 
 class CarpoolingType extends AbstractType
 {
@@ -20,6 +22,9 @@ class CarpoolingType extends AbstractType
                 'class'        => 'AppBundle:AdvertType',
                 'label'        => 'Type : ',
                 'choice_label' => 'type'
+            ))
+            ->add('startingPoint', TextType::class, array(
+                'label'        => 'Point de départ : '
             ))
             ->add('description', TextareaType::class, array(
                 'label'        => 'Description : ',

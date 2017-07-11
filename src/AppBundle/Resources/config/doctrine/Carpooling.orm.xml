@@ -14,6 +14,11 @@
         <option name="fixed"/>
       </options>
     </field>
+    <field name="startingPoint" type="string" column="starting_point" length="256" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
     <many-to-one field="type" target-entity="AdvertType" fetch="LAZY">
       <join-columns>
         <join-column name="type" referenced-column-name="id"/>

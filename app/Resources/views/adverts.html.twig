@@ -2,7 +2,17 @@
 
 {% block main %}
     {% if adverts|length %}
+        <input id="address" type="hidden" name="establishment_address" value= {{ adverts[0].establishment.address }} />
+        <input id="city" type="hidden" name="establishment_city" value= {{ adverts[0].establishment.city }} />
         <div class="list-container">
+        <div id="map">
+                {% javascripts 'js/googlemap/googlemaplist.js' %}
+                    <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
+                <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzt2tJdYaa2BW4xbkIMVipyKQAvuFr71w&callback=initMap">
+                </script>
+        </div>
             <div class="resultat">
                 <h1>Annonce(s) de covoiturage disponible pour le 
                     <i class="lightgreen">{{ adverts[0].establishment.name }}
@@ -37,6 +47,7 @@
                             <button class="logo menudown lightgreen">
                                 Plus d'infos
                             </button>
+                            <input type='hidden' value={{advert.startingPoint}} />
                         </div>
                     </div>
                     <div class="userinfo hidden">
@@ -66,6 +77,7 @@
                             </div>
                             <div class="redirect-container">
                                 <button class="logo menudown darkgreen">Plus d'infos</button>
+                                <input type='hidden' value={{advert.startingPoint}} />
                             </div>
                         </div>
                         <div class="userinfo hidden">

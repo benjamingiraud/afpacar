@@ -19,6 +19,7 @@ $(document).ready(function( ) {
     $( "#appbundle_carpooling_type" ).selectmenu();
     $( ".menudown" ).click(function() {
         $(this).toggleClass("active");
+        $("#map").appendTo($(this).parent().parent().next());
         $(this).parent().parent().next().slideToggle("1500");
     });
     $( function() {
@@ -42,7 +43,7 @@ $(document).ready(function( ) {
               duration: 500
             },
             hide: {
-              effect: "drop",
+              effect: "explode",
               duration: 500
             },
             open: function(event, ui) {

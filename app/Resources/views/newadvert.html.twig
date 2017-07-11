@@ -1,20 +1,15 @@
 {% extends 'template.html.twig' %}{# empty Twig template #}
 {% block main %}
-    <div id="map">
-            {% javascripts 'js/googlemap/*' %}
-                <script src="{{ asset_url }}"></script>
-            {% endjavascripts %}
-            <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzt2tJdYaa2BW4xbkIMVipyKQAvuFr71w&callback=initMap">
-            </script>
-        </div>
-    <div class="column-wrapper">
-        <div class="title-container">
-            {#{% if error %}
-                <div class="dialog" title="Echec de la connexion">
-                    <span>Le mot de passe et le nom d'utilisateur renseignés ne correspondent pas.</span>
-                </div>
-            {% endif %}#}
+    <div class="column-wrapper newadvertform">
+        <div class="title-container googlemapfix">
+            <div id="map">
+                {% javascripts 'js/googlemap/googleapi.js' %}
+                    <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
+                <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzt2tJdYaa2BW4xbkIMVipyKQAvuFr71w&callback=initMap">
+                </script>
+            </div>
             <h1 class="logo advert darkgreen">Nouvelle annonce</h1>
         </div>
         {{ form_start(form, {'attr': {'class': 'column-wrapper'} }) }}
@@ -22,11 +17,18 @@
             {{ form_label(form.type) }}
             {{ form_widget(form.type) }}
             </div>
+            <div>
+            {{ form_label(form.startingPoint) }}
+            {{ form_widget(form.startingPoint) }}
+            </div>
             <div class="textarea-container">
             {{ form_label(form.description) }}
             {{ form_widget(form.description) }}
             </div>
-            <input type="hidden" name="establishment_id" value= {{id}} />
+            <input type="hidden" name="establishment_id" value= {{ establishment.id }} />
+            <input id="address" type="hidden" name="establishment_address" value= {{ establishment.address }} />
+            <input id="city" type="hidden" name="establishment_city" value= {{ establishment.city }} />
+                   
             <div class="subtmit-container">
                 <button class='inputfont' type="submit">Créez votre annonce!</button>
             </div>

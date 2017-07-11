@@ -12,8 +12,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
-    height: 100%;
-    
+    height: 100%; 
 }
 .fontAwesome {
     font-family: 'FontAwesome';
@@ -159,6 +158,9 @@ input[name=search] {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+}
+.newadvertform {
+    width: 75%;
 }
 form.column-wrapper {
     width: 100%;
@@ -509,8 +511,9 @@ textarea {
     margin-bottom: 2em;
 }
 #map {
-    height: 100%;
-    width: 100%;
+    height: 480px;
+    width: auto;
+    margin-bottom: 2em;
 }
 .loginsignupindex {
     margin: 2em auto 2em auto;

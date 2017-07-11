@@ -39,20 +39,21 @@ function setCenter(geocoder, address) {
                     map: map,
                     title: 'Votre centre AFPA'
                 });
-                var onChangeHandler = function() {
-                    calculateAndDisplayRoute(directionsService, 
-                        directionsDisplay);
-                 };
-                document.getElementById('appbundle_carpooling_startingPoint')
-                        .addEventListener('change', onChangeHandler);
+//                document.getElementById('appbundle_carpooling_startingPoint')
+//                        .addEventListener('change', onChangeHandler);
+                  $(".menudown").click(function (){
+                      calculateAndDisplayRoute(directionsService, 
+                        directionsDisplay, $(this).next().val());
+                  })
             } else {
                 alert('Geocode was not successful for the following reason: ' + status);
             }
        });
 }
-function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+function calculateAndDisplayRoute(directionsService, directionsDisplay, val) {
+    console.log(val);
     directionsService.route({
-        origin: $("#appbundle_carpooling_startingPoint").val(),
+        origin: val,
         destination: afpa,
         travelMode: 'DRIVING',
         unitSystem: google.maps.UnitSystem.METRIC,

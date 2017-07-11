@@ -138,5 +138,33 @@ class Carpooling
     {
         return $this->user;
     }
-}
+    /**
+     * @var string
+     */
+    private $startingPoint;
 
+
+    /**
+     * Set startingPoint
+     *
+     * @param string $startingPoint
+     *
+     * @return Carpooling
+     */
+    public function setStartingPoint($startingPoint)
+    {
+        $this->startingPoint = $startingPoint;
+
+        return $this;
+    }
+
+    /**
+     * Get startingPoint
+     *
+     * @return string
+     */
+    public function getStartingPoint()
+    {
+        return $this->startingPoint;
+    }
+}

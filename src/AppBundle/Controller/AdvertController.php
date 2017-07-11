@@ -37,15 +37,15 @@ class AdvertController extends Controller
     {
        $advert = new Carpooling();
        $id = $request->request->get('establishment_id');
+       $establishment = $this->getDoctrine()
+                             ->getRepository('AppBundle:Establishment')
+                             ->find($id);
        
        $form = $this->createForm(CarpoolingType::class, $advert);
        $form->handleRequest($request);
        
        if ($form->isSubmitted() && $form->isValid()) {
             
-            $establishment = $this->getDoctrine()
-                                  ->getRepository('AppBundle:Establishment')
-                                  ->find($id);
             $advert->setEstablishment($establishment);
             $advert->setUser($this->getUser());
 
@@ -58,6 +58,6 @@ class AdvertController extends Controller
        
       return $this->render('newadvert.html.twig',
               array('form' => $form->createView(),
-                     'id'  => $id));
+                    'establishment'  => $establishment));
     }
 }
