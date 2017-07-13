@@ -6,7 +6,7 @@ $(document).ready(function( ) {
         mode: 'horizontal',
         useCSS: false,
         easing: 'easeOutElastic',
-        speed: 2000,
+        speed: 1500,
         randomStart: true,
         pager: false,
         responsive: true
@@ -17,9 +17,19 @@ $(document).ready(function( ) {
     $( "#etablishments" ).selectmenu();
     $( "#user_region" ).selectmenu();
     $( "#appbundle_carpooling_type" ).selectmenu();
-    $( ".menudown" ).click(function() {
+
+    $(document).on("click", ".menudown", function() {
+        if ($(":button").not($(this)).hasClass("active")) {
+            var wasOpen = $(".active");
+            wasOpen.removeClass("active");
+            wasOpen.parent().parent().next().slideUp("1500");
+            wasOpen.html('Plus d\'infos');
+        }
         $(this).toggleClass("active");
-        $("#map").appendTo($(this).parent().parent().next());
+        if ($(this).hasClass("active")) {
+            $(this).html('Moins d\'infos');
+            $("#map").appendTo($(this).parent().parent().next());
+        } else $(this).html('Plus d\'infos');
         $(this).parent().parent().next().slideToggle("1500");
     });
     $( function() {

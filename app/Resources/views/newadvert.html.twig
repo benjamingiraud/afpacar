@@ -2,6 +2,7 @@
 {% block main %}
     <div class="column-wrapper newadvertform">
         <div class="title-container googlemapfix">
+            <h1 class="logo advert darkgreen">Nouvelle annonce</h1>
             <div id="map">
                 {% javascripts 'js/googlemap/googleapi.js' %}
                     <script src="{{ asset_url }}"></script>
@@ -10,7 +11,6 @@
                     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzt2tJdYaa2BW4xbkIMVipyKQAvuFr71w&callback=initMap">
                 </script>
             </div>
-            <h1 class="logo advert darkgreen">Nouvelle annonce</h1>
         </div>
         {{ form_start(form, {'attr': {'class': 'column-wrapper'} }) }}
             <div>

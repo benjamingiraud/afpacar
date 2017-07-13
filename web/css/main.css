@@ -259,7 +259,12 @@ div.ui-tooltip {
     flex-direction: column;
     justify-content: flex-start;
     margin-left: 1em;
-    max-width: 75%;
+}
+.etinfos-container {
+    max-width: 75%
+}
+.coordonate {
+    max-width: 50%;
 }
 .redirect-container {
     display: flex;
@@ -514,6 +519,7 @@ textarea {
     height: 480px;
     width: auto;
     margin-bottom: 2em;
+    margin-top: 2em;
 }
 .loginsignupindex {
     margin: 2em auto 2em auto;

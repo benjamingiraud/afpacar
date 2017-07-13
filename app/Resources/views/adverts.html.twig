@@ -5,19 +5,20 @@
         <input id="address" type="hidden" name="establishment_address" value= {{ adverts[0].establishment.address }} />
         <input id="city" type="hidden" name="establishment_city" value= {{ adverts[0].establishment.city }} />
         <div class="list-container">
-        <div id="map">
-                {% javascripts 'js/googlemap/googlemaplist.js' %}
-                    <script src="{{ asset_url }}"></script>
-                {% endjavascripts %}
-                <script async defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzt2tJdYaa2BW4xbkIMVipyKQAvuFr71w&callback=initMap">
-                </script>
-        </div>
+        
             <div class="resultat">
                 <h1>Annonce(s) de covoiturage disponible pour le 
                     <i class="lightgreen">{{ adverts[0].establishment.name }}
                     </i>
                 </h1>
+                <div id="map">
+                    {% javascripts 'js/googlemap/googlemaplist.js' %}
+                        <script src="{{ asset_url }}"></script>
+                    {% endjavascripts %}
+                    <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzt2tJdYaa2BW4xbkIMVipyKQAvuFr71w&callback=initMap">
+                    </script>
+                </div>
                 <h2>
                     <b class="lightgreen">{{ adverts|length }}</b> 
                     annonce(s) trouvé(s)
@@ -36,11 +37,7 @@
                 <div class="etablishment-container">
                     <div class='sumup'>
                         <div class="etinfos-container">
-                            <h2>Vous est offert par : 
-                                <i class="lightgreen">
-                                    {{ advert.user.username }}
-                                </i>
-                            </h2>
+                            <h2> <i class="lightgreen">{{ advert.user.username }}</i> propose du covoiturage!</h2>
                             <p>{{ advert.description }}</p>
                         </div>
                         <div class="redirect-container">
