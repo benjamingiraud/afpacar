@@ -483,6 +483,8 @@ footer span {
     color: #44A33D;
 }
 .newadvert {
+    box-sizing: border-box;
+    margin-top: 2em;    
     width: 100%;
     padding: 1em;
     background-color: #6ED023;

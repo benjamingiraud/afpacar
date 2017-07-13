@@ -94,7 +94,7 @@
                     </div>
             {% endfor %}
             </div>
-            <a href= "{{ path('new_advert', {'region': establishment.name|lower|replace(' ', '+')}) }}">Créez votre propre annonce de covoiturage !</a>
+            <a class="logo car newadvert" href= "{{ path('new_advert', {'region': establishment.name|lower|replace(' ', '+')}) }}">Créez votre propre annonce de covoiturage !</a>
         </div>
     {% else %}
         <div class="list-container">
