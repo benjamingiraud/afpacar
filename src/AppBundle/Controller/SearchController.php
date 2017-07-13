@@ -14,17 +14,17 @@ class SearchController extends Controller
     
     public function mapAction($filter)
     {
-       $em = $this->getDoctrine()->getManager();
-        
-       $query = $em->createQuery('SELECT e, r 
-                                  FROM AppBundle:Establishment e
-                                  JOIN e.region r
-                                  WHERE r.region = :region'
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQuery('SELECT e, r 
+                                   FROM AppBundle:Establishment e
+                                   JOIN e.region r
+                                   WHERE r.region = :region'
                                  )->setParameter('region', $filter);
 
-      $establishments = $query->getResult();
-      $queryNumber    = count($establishments);
-       
+        $establishments = $query->getResult();
+        $queryNumber    = count($establishments);
+
         return $this->render('search.html.twig', array(
             'establishments' => $establishments,
             'number'         => $queryNumber,
@@ -38,21 +38,21 @@ class SearchController extends Controller
     
     public function inputAction(Request $request)
     {
-       $filter = $request->request->get('search');
-       $em = $this->getDoctrine()->getManager();
-        
-       $query = $em->createQuery('SELECT e, r
-                                  FROM AppBundle:Establishment e
-                                  JOIN e.region r
-                                  WHERE e.address LIKE :test
-                                  OR    r.region  LIKE :test
-                                  OR    e.postal  LIKE :test
-                                  OR    e.city    LIKE :test
-                                  OR    e.name    LIKE :test
-                                ')->setParameter("test", '%' . $filter . '%');
+        $filter = $request->request->get('search');
+        $em = $this->getDoctrine()->getManager();
 
-      $establishments = $query->getResult();
-      $queryNumber    = count($establishments);
+        $query = $em->createQuery('SELECT e, r
+                                   FROM AppBundle:Establishment e
+                                   JOIN e.region r
+                                   WHERE e.address LIKE :test
+                                   OR    r.region  LIKE :test
+                                   OR    e.postal  LIKE :test
+                                   OR    e.city    LIKE :test
+                                   OR    e.name    LIKE :test
+                                 ')->setParameter("test", '%' . $filter . '%');
+
+        $establishments = $query->getResult();
+        $queryNumber    = count($establishments);
        
         return $this->render('search.html.twig', array(
             'establishments' => $establishments,

@@ -49,8 +49,6 @@ class AccountController extends Controller
     {
         
         $error = $authUtils->getLastAuthenticationError();
-
-        // last username entered by the user
         $lastUsername = $authUtils->getLastUsername();
 
         return $this->render('login.html.twig', array(

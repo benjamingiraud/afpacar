@@ -2,13 +2,13 @@
 
 {% block main %}
     {% if adverts|length %}
-        <input id="address" type="hidden" name="establishment_address" value= {{ adverts[0].establishment.address }} />
-        <input id="city" type="hidden" name="establishment_city" value= {{ adverts[0].establishment.city }} />
+        <input id="address" type="hidden" name="establishment_address" value= {{ establishment.address }} />
+        <input id="city" type="hidden" name="establishment_city" value= {{ establishment.city }} />
         <div class="list-container">
         
             <div class="resultat">
                 <h1>Annonce(s) de covoiturage disponible pour le 
-                    <i class="lightgreen">{{ adverts[0].establishment.name }}
+                    <i class="lightgreen">{{ establishment.name }}
                     </i>
                 </h1>
                 <div id="map">
@@ -84,7 +84,7 @@
                                     <p class='logo mail darkgreen'><span class='black'>Email : </span><b>{{ advert.user.mail }}</b></p>
                                     <p class='logo date darkgreen'><span class='black'>Fini sa formation le   : </span><b>{{ advert.user.expire|date('d/m/Y') }}</b></p>
                                 </div>
-                                <a class="logo redirect alignselft darkgreen" href=''>Je lui propose du covoiturage!</a>
+                                <a class="logo redirect car darkgreen" href=''>Je lui propose du covoiturage!</a>
                             </div>
                         </div>
                     </div>
@@ -94,23 +94,14 @@
                     </div>
             {% endfor %}
             </div>
-            <form action= "{{ path('new_advert', {'region': region}) }}" 
-                method="post" class="redirect-container margin-top">
-                <input type="hidden" name="establishment_id" value= {{ establishmentID }} />
-                <button class="logo newadvert" type="submit">Créez votre propre annonce de covoiturage !</button>
-            </form>
+            <a href= "{{ path('new_advert', {'region': establishment.name|lower|replace(' ', '+')}) }}">Créez votre propre annonce de covoiturage !</a>
         </div>
     {% else %}
         <div class="list-container">
                 <div class="resultat">
-                    <h2>Aucune annonce de co-voiturage disponible pour le </h2>
+                    <h2>Aucune annonce de co-voiturage disponible pour le <i class='lightgreen'>{{ establishment.name }}</i></h2>
                 </div>                        
-                 <form action= "{{ path('new_advert', {'region': region}) }}" 
-                      method="post"
-                      class="redirect-container margin-top">
-                    <input type="hidden" name="establishment_id" value= {{ establishmentID }} />
-                    <button class="logo newadvert" type="submit">Soyez alors le premier à créer une annonce !</button>
-                </form>
-          </div>';
+                <a class="logo car newadvert" href= "{{ path('new_advert', {'region': establishment.name|lower|replace(' ', '+')}) }}">Soyez alors le premier à créer une annonce !</a>
+          </div>
     {% endif %}
 {% endblock %}

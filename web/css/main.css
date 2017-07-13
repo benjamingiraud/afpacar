@@ -441,7 +441,7 @@ labelInput-container label {
     background-color : #44A33D;
     color: white;
 }
-button.redirect:hover {
+a.redirect:hover {
     color: #6ED023;
 }
 .ask-container {
@@ -488,6 +488,8 @@ footer span {
     background-color: #6ED023;
     transition: 0.33s all ease-out;
     color: #FFFFFF;
+    text-align: center;
+    text-decoration: none;
 }
 .newadvert:hover {
     background-color: #44A33D;

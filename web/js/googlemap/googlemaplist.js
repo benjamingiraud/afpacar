@@ -42,9 +42,10 @@ function setCenter(geocoder, address) {
 //                document.getElementById('appbundle_carpooling_startingPoint')
 //                        .addEventListener('change', onChangeHandler);
                   $(".menudown").click(function (){
+                      if (!($(this).hasClass("active")))
                       calculateAndDisplayRoute(directionsService, 
                         directionsDisplay, $(this).next().val());
-                  })
+                  });
             } else {
                 alert('Geocode was not successful for the following reason: ' + status);
             }

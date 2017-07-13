@@ -15,49 +15,65 @@ class AdvertController extends Controller
      */
     public function listAction(Request $request, $region)
     {
-       $id = $request->request->get('establishment_id');
+        $id = $request->request->get('establishment_id');
+        $region = str_replace("+"," ", $region);
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $getEstablishment = $em->createQuery('SELECT e
+                                              FROM AppBundle:Establishment e
+                                              WHERE e.name LIKE :region
+                                            ')->setParameter('region', $region);
+        $establishment = $getEstablishment->getSingleResult();
+        
+        $query = $em->createQuery('SELECT c, e
+                                   FROM AppBundle:Carpooling c
+                                   JOIN c.establishment e
+                                   WHERE e = :id
+                                 ')->setParameter('id', $establishment->getId());
        
-       $em = $this->getDoctrine()->getManager();
-       $query = $em->createQuery('SELECT c, e
-                                  FROM AppBundle:Carpooling c
-                                  JOIN c.establishment e
-                                  WHERE e = :id
-                                ')->setParameter('id', $id);
-       
-      $adverts = $query->getResult();
-      return $this->render('adverts.html.twig',
-              array('adverts'         => $adverts,
-                    'region'          => $region,
-                    'establishmentID' => $id));
+        $adverts = $query->getResult();
+        
+        return $this->render('adverts.html.twig',
+                array('adverts'         => $adverts,
+                      'establishment'   => $establishment
+        ));
     }
+    
     /**
      * @Route("/adverts/{region}/new", name="new_advert")
      */
     public function newAction(Request $request, $region)
     {
-       $advert = new Carpooling();
-       $id = $request->request->get('establishment_id');
-       $establishment = $this->getDoctrine()
-                             ->getRepository('AppBundle:Establishment')
-                             ->find($id);
+        $advert = new Carpooling();
+        
+        $region = str_replace("+"," ", $region);
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $getEstablishment = $em->createQuery('SELECT e
+                                              FROM AppBundle:Establishment e
+                                              WHERE e.name LIKE :region
+                                            ')->setParameter('region', $region);
+        $establishment = $getEstablishment->getSingleResult();
+
+        $form = $this->createForm(CarpoolingType::class, $advert);
+        $form->handleRequest($request);
        
-       $form = $this->createForm(CarpoolingType::class, $advert);
-       $form->handleRequest($request);
-       
-       if ($form->isSubmitted() && $form->isValid()) {
-            
+        if ($form->isSubmitted() && $form->isValid()) {
+
             $advert->setEstablishment($establishment);
             $advert->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($advert);
             $em->flush();
-            
+
             return $this->redirectToRoute('index');
         }
-       
-      return $this->render('newadvert.html.twig',
-              array('form' => $form->createView(),
-                    'establishment'  => $establishment));
+
+        return $this->render('newadvert.html.twig',
+                array('form'           => $form->createView(),
+                      'establishment'  => $establishment));
     }
 }

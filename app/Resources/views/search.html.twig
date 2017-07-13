@@ -19,12 +19,8 @@
                     <p>{{ establishment.address }}</p>
                     <p>{{ establishment.postal }} {{ establishment.city }} </p>
                 </div>
-                <form action= "{{ path('advert', {'region': establishment.name|lower|replace(' ', '-')}) }}" 
-                      method="post"
-                      class="redirect-container margin-right">
-                    <input type="hidden" name="establishment_id" value= {{establishment.id}} />
-                    <button class="logo redirect darkgreen" type="submit">Voir la fiche de covoiturage !</button>
-                </form>
+                <a class="logo redirect darkgreen" href= "{{ path('advert', {'region': establishment.name|lower|replace(' ', '+')}) }}" >Voir la fiche de covoiturage !</a>
+                {#<button class="logo redirect darkgreen" type="submit">Voir la fiche de covoiturage !</button>#}
             </div>
     {% endfor %}
     </div>
