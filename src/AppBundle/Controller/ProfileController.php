@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class UProfileController extends Controller
+class ProfileController extends Controller
 {
     /**
      * @Route("/profile/{username}", name="profile")

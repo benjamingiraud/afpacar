@@ -23,7 +23,7 @@
                         <div class="slider-advert-header">
                             Dans le {{ advert.establishment.name|lower }} :
                         </div>
-                        <a href=""><div class="slider-advert">
+                        <a href="{{ path('advert', {'region': advert.establishment.name|lower|replace(' ', '_')}) }}#{{advert.id}}"><div class="slider-advert">
                             <h2><i class="lightgreen">{{ advert.user.username }}</i>
                                 propose du covoiturage!
                             </h2>
@@ -37,7 +37,7 @@
                         <div class="slider-advert-header">
                             Dans le {{ advert.establishment.name|lower }} :
                         </div>
-                        <a href=""><div class="slider-advert">
+                        <a href="{{ path('advert', {'region': advert.establishment.name|lower|replace(' ', '_')}) }}#{{advert.id}}"><div class="slider-advert">
                             <div class="slider-advert">
                                 <h2><i class="darkgreen">{{ advert.user.username }}</i> cherche à faire du coivoiturage !</h2>
                                 <p>{{ advert.description }}</p>

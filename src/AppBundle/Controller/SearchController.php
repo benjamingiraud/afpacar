@@ -23,11 +23,9 @@ class SearchController extends Controller
                                  )->setParameter('region', $filter);
 
         $establishments = $query->getResult();
-        $queryNumber    = count($establishments);
 
         return $this->render('search.html.twig', array(
             'establishments' => $establishments,
-            'number'         => $queryNumber,
             'filter'         => $filter
         ));
     }
@@ -52,11 +50,9 @@ class SearchController extends Controller
                                  ')->setParameter("test", '%' . $filter . '%');
 
         $establishments = $query->getResult();
-        $queryNumber    = count($establishments);
        
         return $this->render('search.html.twig', array(
             'establishments' => $establishments,
-            'number'         => $queryNumber,
             'filter'         => $filter
         ));
     }

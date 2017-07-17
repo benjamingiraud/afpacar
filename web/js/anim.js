@@ -5,7 +5,7 @@ $(document).ready(function( ) {
         hideControl: true,
         mode: 'horizontal',
         useCSS: false,
-        easing: 'easeOutElastic',
+        easing: 'easeOutBounce',
         speed: 1500,
         randomStart: true,
         pager: false,

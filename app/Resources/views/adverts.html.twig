@@ -34,7 +34,7 @@
             </div>
             <div class='offers-container'>
             {% for advert in adverts if advert.type.type == "Offre" %}
-                <div class="etablishment-container">
+                <div id="{{ advert.id }}" class="etablishment-container">
                     <div class='sumup'>
                         <div class="etinfos-container">
                             <h2> <i class="lightgreen">{{ advert.user.username }}</i> propose du covoiturage!</h2>
@@ -66,7 +66,7 @@
             </div>
             <div class='ask-container'>
             {% for advert in adverts if advert.type.type == "Demande" %}
-                    <div class="etablishment-container">
+                    <div id="{{ advert.id }}" class="etablishment-container">
                         <div class='sumup'>
                             <div class="etinfos-container">
                                 <h2><i class="darkgreen">{{ advert.user.username }}</i> cherche à faire du coivoiturage !</h2>
@@ -94,14 +94,14 @@
                     </div>
             {% endfor %}
             </div>
-            <a class="logo car newadvert" href= "{{ path('new_advert', {'region': establishment.name|lower|replace(' ', '+')}) }}">Créez votre propre annonce de covoiturage !</a>
+            <a class="logo car newadvert" href= "{{ path('new_advert', {'region': establishment.name|lower|replace(' ', '_')}) }}">Créez votre propre annonce de covoiturage !</a>
         </div>
     {% else %}
         <div class="list-container">
                 <div class="resultat">
                     <h2>Aucune annonce de co-voiturage disponible pour le <i class='lightgreen'>{{ establishment.name }}</i></h2>
                 </div>                        
-                <a class="logo car newadvert" href= "{{ path('new_advert', {'region': establishment.name|lower|replace(' ', '+')}) }}">Soyez alors le premier à créer une annonce !</a>
+                <a class="logo car newadvert" href= "{{ path('new_advert', {'region': establishment.name|lower|replace(' ', '_')}) }}">Soyez alors le premier à créer une annonce !</a>
           </div>
     {% endif %}
 {% endblock %}

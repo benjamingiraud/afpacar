@@ -19,7 +19,7 @@
                     <p>{{ establishment.address }}</p>
                     <p>{{ establishment.postal }} {{ establishment.city }} </p>
                 </div>
-                <a class="logo redirect darkgreen" href= "{{ path('advert', {'region': establishment.name|lower|replace(' ', '+')}) }}" >Voir la fiche de covoiturage !</a>
+                <a class="logo redirect darkgreen" href= "{{ path('advert', {'region': establishment.name|lower|replace(' ', '_')}) }}" >Voir la fiche de covoiturage !</a>
                 {#<button class="logo redirect darkgreen" type="submit">Voir la fiche de covoiturage !</button>#}
             </div>
     {% endfor %}

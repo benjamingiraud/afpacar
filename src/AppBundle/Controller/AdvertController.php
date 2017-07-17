@@ -16,7 +16,7 @@ class AdvertController extends Controller
     public function listAction(Request $request, $region)
     {
         $id = $request->request->get('establishment_id');
-        $region = str_replace("+"," ", $region);
+        $region = str_replace("_"," ", $region);
         
         $em = $this->getDoctrine()->getManager();
         
@@ -47,7 +47,7 @@ class AdvertController extends Controller
     {
         $advert = new Carpooling();
         
-        $region = str_replace("+"," ", $region);
+        $region = str_replace("_"," ", $region);
         
         $em = $this->getDoctrine()->getManager();
         
