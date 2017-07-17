@@ -19,19 +19,21 @@
         {% for advert in adverts %}
             {% if advert.type.type == "Offre" %}
                 <li>
-                    <div class=slider-advert-container>
-                        <div class="slider-advert-header">
-                            Dans le {{ advert.establishment.name|lower }} :
+                    <a href="{{path('advert', {'region': advert.establishment.name|lower|replace(' ', '_')}) }}#{{advert.id}}"><div class="slider-advert">
+                        <div class=slider-advert-container>
+                            <div class="slider-advert-header">
+                                Dans le {{ advert.establishment.name|lower }} :
+                            </div>
+                            <a href="{{ path('advert', {'region': advert.establishment.name|lower|replace(' ', '_')}) }}#{{advert.id}}"><div class="slider-advert">
+                                <h2><i class="lightgreen">{{ advert.user.username }}</i>
+                                    propose du covoiturage!
+                                </h2>
+                                <p>{{ advert.description }}</p>
+                                </div>
                         </div>
-                        <a href="{{ path('advert', {'region': advert.establishment.name|lower|replace(' ', '_')}) }}#{{advert.id}}"><div class="slider-advert">
-                            <h2><i class="lightgreen">{{ advert.user.username }}</i>
-                                propose du covoiturage!
-                            </h2>
-                            <p>{{ advert.description }}</p>
-                            </div></a>
-                    </div>
+                    </a>
                 </li>
-            {% else %}
+            {#{% else %}
                 <li>
                     <div class=slider-advert-container>
                         <div class="slider-advert-header">
@@ -44,7 +46,7 @@
                             </div>
                         </div></a>
                     </div>
-                </li>
+                </li>#}
             {% endif %}
         {% endfor %}
         </ul>
