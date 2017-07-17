@@ -1,7 +1,8 @@
 # Installation
-- Clone this repository wherever you want using this command (console) :
+- Clone this repository wherever you want using this command (eg. cloned in Documents) :
 
-`$ git clone https://github.com/benjamingiraud/afpacar`
+  `~/Documents$ git clone https://github.com/benjamingiraud/afpacar
+  
 - Go to the previously cloned repository folder and install dependencies (eg. if cloned in Documents) :
 
-`.../Documents/afpacar:~$ composer install`
+  `~/Documents/afpacar$ composer install`
