@@ -6,3 +6,7 @@
 - Go to the previously cloned repository folder and install dependencies (eg. if cloned in Documents) :
 
   `~/Documents/afpacar$ composer install`
+  
+- Start the server :
+
+  `~/Documents/afpacar$ php bin/console server:start`
